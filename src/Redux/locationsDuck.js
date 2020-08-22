@@ -1,14 +1,12 @@
-import ApolloClient, { gql } from "apollo-boost"
-
+import ApolloClient, { gql } from "apollo-boost";
 
 let client = new ApolloClient({
     uri: "https://rickandmortyapi.com/graphql"
 })
 
-let GET_CHARACTERS = 'GET_CHARACTERS';
-let GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
-let GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
-
+let GET_LOCATIONS = 'GET_LOCATIONS';
+let GET_LOCATIONS_SUCCESS = 'GET_LOCATIONS_SUCCESS';
+let GET_LOCATIONS_ERROR = 'GET_LOCATIONS_ERROR';
 
 let initialData = {
     fetching: false,
@@ -16,16 +14,15 @@ let initialData = {
     current: {}
 }
 
-
 // Reducer
 
 export default function reducer(state = initialData, action) {
     switch (action.type) {
-        case GET_CHARACTERS:
+        case GET_LOCATIONS:
             return { ...state, fetching: true }
-        case GET_CHARACTERS_ERROR:
+        case GET_LOCATIONS_ERROR:
             return { ...state, fetching: false, error: action.payload }
-        case GET_CHARACTERS_SUCCESS:
+        case GET_LOCATIONS_SUCCESS:
             return { ...state, array: action.payload, fetching: false }
         default:
             return state
@@ -34,22 +31,25 @@ export default function reducer(state = initialData, action) {
 
 //Actions Creators
 
-export let getCharactersAction = () => (dispatch, getState) => {
+export let getLocationsAction = () => (dispatch, getState) => {
     let query = gql`
         {
-            characters{
+            locations{
                 results{
                   id
                   name
                   type
-                  gender
-                  species
+                  dimension
+                  residents{
+                    id
+                    name
+                  }
                 }
-            }
+              }
         }
     `
     dispatch({
-        type: GET_CHARACTERS
+        type: GET_LOCATIONS
     })
 
     return client.query({
@@ -57,14 +57,14 @@ export let getCharactersAction = () => (dispatch, getState) => {
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
-                type: GET_CHARACTERS_ERROR,
+                type: GET_LOCATIONS_ERROR,
                 payload: error
             })
             return
         }
         dispatch({
-            type: GET_CHARACTERS_SUCCESS,
-            payload: data.characters.results
+            type: GET_LOCATIONS_SUCCESS,
+            payload: data.locations.results
         })
 
 

@@ -1,14 +1,12 @@
-import ApolloClient, { gql } from "apollo-boost"
-
+import ApolloClient, { gql } from "apollo-boost";
 
 let client = new ApolloClient({
     uri: "https://rickandmortyapi.com/graphql"
 })
 
-let GET_CHARACTERS = 'GET_CHARACTERS';
-let GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
-let GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
-
+let GET_EPISODES = 'GET_EPISODES';
+let GET_EPISODES_SUCCESS = 'GET_EPISODES_SUCCESS';
+let GET_EPISODES_ERROR = 'GET_EPISODES_ERROR';
 
 let initialData = {
     fetching: false,
@@ -21,11 +19,11 @@ let initialData = {
 
 export default function reducer(state = initialData, action) {
     switch (action.type) {
-        case GET_CHARACTERS:
+        case GET_EPISODES:
             return { ...state, fetching: true }
-        case GET_CHARACTERS_ERROR:
+        case GET_EPISODES_ERROR:
             return { ...state, fetching: false, error: action.payload }
-        case GET_CHARACTERS_SUCCESS:
+        case GET_EPISODES_SUCCESS:
             return { ...state, array: action.payload, fetching: false }
         default:
             return state
@@ -34,22 +32,25 @@ export default function reducer(state = initialData, action) {
 
 //Actions Creators
 
-export let getCharactersAction = () => (dispatch, getState) => {
+export let getEpisodesAction = () => (dispatch, getState) => {
     let query = gql`
         {
-            characters{
+            episodes{
                 results{
                   id
                   name
-                  type
-                  gender
-                  species
+                  episode
+                  air_date
+                  characters{
+                    id
+                    name
+                  }
                 }
-            }
+              }
         }
     `
     dispatch({
-        type: GET_CHARACTERS
+        type: GET_EPISODES
     })
 
     return client.query({
@@ -57,14 +58,14 @@ export let getCharactersAction = () => (dispatch, getState) => {
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
-                type: GET_CHARACTERS_ERROR,
+                type: GET_EPISODES_ERROR,
                 payload: error
             })
             return
         }
         dispatch({
-            type: GET_CHARACTERS_SUCCESS,
-            payload: data.characters.results
+            type: GET_EPISODES_SUCCESS,
+            payload: data.episodes.results
         })
 
 
