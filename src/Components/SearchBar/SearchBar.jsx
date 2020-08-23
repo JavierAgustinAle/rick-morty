@@ -17,7 +17,7 @@ const SearchBar = ({ title, characters, episodes, locations }) => {
             if (title === 'characters') {
                 characters.filter(function (charc) {
                     let personaje;
-                    if (charc.name.includes(target)) {
+                    if (charc.name.includes(target) || charc.type.includes(target)) {
                         console.log(charc)
                         personaje = charc;
                     }
@@ -37,7 +37,7 @@ const SearchBar = ({ title, characters, episodes, locations }) => {
             if (title === 'locations') {
                 locations.filter(function (loca) {
                     let location;
-                    if (loca.name.includes(target)) {
+                    if (loca.name.includes(target) || loca.type.includes(target)) {
                         console.log(loca)
                         location = loca;
                     }
@@ -50,12 +50,22 @@ const SearchBar = ({ title, characters, episodes, locations }) => {
 
         <form>
             <div>
-                <input className="form-control"
-                    type="text"
-                    placeholder={`Search ${title}`}
-                    aria-label="Search"
-                    onChange={searchInfo}
-                />
+                {
+                    title === 'episodes'
+                        ? <input className="form-control"
+                            type="text"
+                            placeholder={`Search ${title} name`}
+                            aria-label="Search"
+                            onChange={searchInfo}
+                        />
+                        : <input className="form-control"
+                            type="text"
+                            placeholder={`Search ${title} name or type`}
+                            aria-label="Search"
+                            onChange={searchInfo}
+                        />
+                }
+
 
             </div>
         </form>
