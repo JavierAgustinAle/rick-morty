@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 const Header = () => {
 
     return (
+
         <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">
@@ -21,6 +22,8 @@ const Header = () => {
                 </ul>
             </div>
         </nav>
+
+
     )
 }
 

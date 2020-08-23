@@ -1,8 +1,15 @@
 import React from 'react'
+import SearchBar from '../SearchBar/SearchBar';
 
 const Locations = () => {
     return (
-        <h1>Locations</h1>
+        <div className="mx-auto col-8 col-sm-7 pt-3">
+            <SearchBar
+                title="locations"
+            />
+
+        </div>
+
     )
 }
 
