@@ -46,8 +46,8 @@ const SearchBar = ({ title, characters, episodes, locations }) => {
             }
         }
     }
-    return (
 
+    return (
         <form>
             <div>
                 {
