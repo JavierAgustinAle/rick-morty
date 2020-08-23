@@ -61,11 +61,19 @@ export let getLocationsAction = () => (dispatch, getState) => {
                 payload: error
             })
             return
+        } else {
+            for (let i = 0; i < data.locations.results.length; i++) {
+                for (let x = 0; x < 5; x++) {
+                    data.locations.results[i].residents.splice(5, data.locations.results[i].residents.length);
+                }
+            }
+
+            dispatch({
+                type: GET_LOCATIONS_SUCCESS,
+                payload: data.locations.results
+            })
         }
-        dispatch({
-            type: GET_LOCATIONS_SUCCESS,
-            payload: data.locations.results
-        })
+
 
 
     })
