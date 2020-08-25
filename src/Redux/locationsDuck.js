@@ -10,8 +10,7 @@ let GET_LOCATIONS_ERROR = 'GET_LOCATIONS_ERROR';
 
 let initialData = {
     fetching: false,
-    array: [],
-    current: {}
+    array: []
 }
 
 // Reducer

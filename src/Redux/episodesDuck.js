@@ -10,8 +10,7 @@ let GET_EPISODES_ERROR = 'GET_EPISODES_ERROR';
 
 let initialData = {
     fetching: false,
-    array: [],
-    current: {}
+    array: []
 }
 
 

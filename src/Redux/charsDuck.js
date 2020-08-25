@@ -12,8 +12,7 @@ let GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
 
 let initialData = {
     fetching: false,
-    array: [],
-    current: {}
+    array: []
 }
 
 
@@ -36,24 +35,27 @@ export default function reducer(state = initialData, action) {
 
 export let getCharactersAction = () => (dispatch, getState) => {
     let query = gql`
-        {
-            characters{
-                results{
-                  id
-                  name
-                  type
-                  gender
-                  species
-                }
+        query ($page: Int){
+            characters(page: $page){
+            results{
+                id
+                name
+                type
+                gender
+                species
             }
+         }
         }
     `
     dispatch({
         type: GET_CHARACTERS
     })
 
+    let pageInitial = Math.floor(Math.random() * (34 - 1)) + 1;
+
     return client.query({
-        query
+        query,
+        variables: { page: pageInitial }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -65,9 +67,9 @@ export let getCharactersAction = () => (dispatch, getState) => {
         dispatch({
             type: GET_CHARACTERS_SUCCESS,
             payload: data.characters.results
+
         })
-
-
     })
 
 }
+
