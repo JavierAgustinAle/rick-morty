@@ -2,10 +2,13 @@ import React from 'react';
 
 // Redux
 import { connect } from 'react-redux';
+import { getCharFiltersAction } from '../../Redux/charsDuck';
+import { getEpisodesFiltersAction } from '../../Redux/episodesDuck';
+import { getLocationsFiltersAction } from '../../Redux/locationsDuck';
 
-
-
-const SearchBar = ({ title, characters, episodes, locations }) => {
+const SearchBar = ({ title,
+    getCharFiltersAction, getEpisodesFiltersAction,
+    getLocationsFiltersAction }) => {
 
     function searchInfo(e) {
 
@@ -15,72 +18,57 @@ const SearchBar = ({ title, characters, episodes, locations }) => {
 
         if (target.length > 2) {
             if (title === 'characters') {
-                characters.filter(function (charc) {
-                    let personaje;
-                    if (charc.name.includes(target) || charc.type.includes(target)) {
-                        console.log(charc)
-                        personaje = charc;
-                    }
-                    return personaje;
-                });
+
+                //Filter by type
+                //getCharFiltersAction('', target);
+
+                //Filter by name
+                getCharFiltersAction(target, '');
             }
             if (title === 'episodes') {
-                episodes.filter(function (epis) {
-                    let episode;
-                    if (epis.name.includes(target)) {
-                        console.log(epis)
-                        episode = epis;
-                    }
-                    return episode;
-                });
+                getEpisodesFiltersAction(target);
             }
             if (title === 'locations') {
-                locations.filter(function (loca) {
-                    let location;
-                    if (loca.name.includes(target) || loca.type.includes(target)) {
-                        console.log(loca)
-                        location = loca;
-                    }
-                    return location;
-                });
+                //Filter by type
+                //getLocationsFiltersAction('', target);
+
+                //Filter by name
+                getLocationsFiltersAction(target, '');
             }
         }
     }
 
     return (
-        <form>
-            <div>
-                {
-                    title === 'episodes'
-                        ? <input className="form-control"
-                            type="text"
-                            placeholder={`Search ${title} name`}
-                            aria-label="Search"
-                            onChange={searchInfo}
-                        />
-                        : <input className="form-control"
-                            type="text"
-                            placeholder={`Search ${title} name or type`}
-                            aria-label="Search"
-                            onChange={searchInfo}
-                        />
-                }
+        <>
+            <form>
+                <div>
+                    {
+                        title === 'episodes'
+                            ? <input className="form-control"
+                                type="text"
+                                placeholder={`Search ${title} name`}
+                                aria-label="Search"
+                                onChange={searchInfo}
+                            />
+                            : <input className="form-control"
+                                type="text"
+                                placeholder={`Search ${title} name or type`}
+                                aria-label="Search"
+                                onChange={searchInfo}
+                            />
+                    }
 
 
-            </div>
-        </form>
-
+                </div>
+            </form>
+        </>
     )
 
 }
 
 // Entrega todo lo que tenga el store
 function mapState(state) {
-    return {
-        characters: state.characters.array,
-        episodes: state.episodes.array,
-        locations: state.locations.array
-    }
+    return {}
 }
 
-export default connect(mapState)(SearchBar);
+export default connect(mapState, { getCharFiltersAction, getEpisodesFiltersAction, getLocationsFiltersAction })(SearchBar);
