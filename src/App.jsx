@@ -1,13 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-
 import AppRoutes from './AppRoutes';
+import './App.css';
 
 function App() {
   return (
-
-    <AppRoutes />
-
+    <div className="style">
+      <AppRoutes />
+    </div>
   );
 }
 

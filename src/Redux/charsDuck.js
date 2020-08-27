@@ -91,6 +91,7 @@ export let getCharactersAction = () => (dispatch, getState) => {
             results{
                 id
                 name
+                image
                 type
                 gender
                 species
