@@ -12,6 +12,8 @@ let GET_FILTERS_EPISODES = 'GET_FILTERS_EPISODES';
 let GET_FILTERS_EPISODES_ERROR = 'GET_FILTERS_EPISODES_ERROR';
 let GET_FILTERS_EPISODES_SUCCESS = 'GET_FILTERS_EPISODES_SUCCESS';
 
+let REMOVE_FILTERED = 'REMOVE_FILTERED';
+
 let initialData = {
     fetching: false,
     array: [],
@@ -35,6 +37,8 @@ export default function reducer(state = initialData, action) {
             return { ...state, fetching: false, error: action.payload }
         case GET_FILTERS_EPISODES_SUCCESS:
             return { ...state, filtered: action.payload, fetching: false }
+        case REMOVE_FILTERED:
+            return { ...state, filtered: action.payload }
         default:
             return state
     }
@@ -86,6 +90,15 @@ export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
         })
     })
 
+}
+
+export let removeSearchEpisodeAction = () => (dispatch, getState) => {
+    let filtered = [];
+
+    dispatch({
+        type: REMOVE_FILTERED,
+        payload: filtered
+    })
 }
 
 export let getEpisodesAction = () => (dispatch, getState) => {

@@ -2,13 +2,14 @@ import React from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-import { getCharFiltersAction } from '../../Redux/charsDuck';
-import { getEpisodesFiltersAction } from '../../Redux/episodesDuck';
-import { getLocationsFiltersAction } from '../../Redux/locationsDuck';
+import { getCharFiltersAction, removeSearchCharAction } from '../../Redux/charsDuck';
+import { getEpisodesFiltersAction, removeSearchEpisodeAction } from '../../Redux/episodesDuck';
+import { getLocationsFiltersAction, removeSearchLocationsAction } from '../../Redux/locationsDuck';
 
 const SearchBar = ({ title,
     getCharFiltersAction, getEpisodesFiltersAction,
-    getLocationsFiltersAction }) => {
+    getLocationsFiltersAction, removeSearchCharAction,
+    removeSearchEpisodeAction, removeSearchLocationsAction }) => {
 
     function searchInfo(e) {
 
@@ -38,17 +39,34 @@ const SearchBar = ({ title,
         }
     }
 
+    function clearSearch() {
+        if (title === 'characters') {
+            removeSearchCharAction();
+            document.getElementById('input').value = '';
+        }
+        if (title === 'episodes') {
+            removeSearchEpisodeAction();
+            document.getElementById('input-episodes').value = '';
+        }
+        if (title === 'locations') {
+            removeSearchLocationsAction();
+            document.getElementById('input').value = '';
+        }
+    }
+
     return (
         <>
-            <div>
+            <div className="pb-2">
                 {
                     title === 'episodes'
-                        ? <input className="form-control"
+                        ?
+                        <input className="form-control"
                             type="text"
                             placeholder={`Search ${title} name`}
                             aria-label="Search"
                             onChange={searchInfo}
                             onKeyPress={(e) => { if (e.keyCode === 13) return false }}
+                            id="input-episodes"
                         />
                         : <input className="form-control"
                             type="text"
@@ -56,8 +74,10 @@ const SearchBar = ({ title,
                             aria-label="Search"
                             onChange={searchInfo}
                             onKeyPress={(e) => { if (e.keyCode === 13) return false }}
+                            id="input"
                         />
                 }
+                <button className="btn btn-sm float-right" onClick={clearSearch}>Clear Search</button>
             </div>
         </>
     )
@@ -69,4 +89,11 @@ function mapState(state) {
     return {}
 }
 
-export default connect(mapState, { getCharFiltersAction, getEpisodesFiltersAction, getLocationsFiltersAction })(SearchBar);
+export default connect(mapState, {
+    getCharFiltersAction,
+    getEpisodesFiltersAction,
+    getLocationsFiltersAction,
+    removeSearchCharAction,
+    removeSearchEpisodeAction,
+    removeSearchLocationsAction
+})(SearchBar);

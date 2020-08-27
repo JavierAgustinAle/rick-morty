@@ -12,6 +12,8 @@ let GET_LOCATIONS_FILTERS = 'GET_LOCATIONS_FILTERS';
 let GET_LOCATIONS_FILTERS_ERROR = 'GET_LOCATIONS_FILTERS_ERROR';
 let GET_LOCATIONS_FILTERS_SUCCESS = 'GET_LOCATIONS_FILTERS_SUCCESS';
 
+let REMOVE_FILTERED = 'REMOVE_FILTERED';
+
 let initialData = {
     fetching: false,
     array: [],
@@ -34,6 +36,8 @@ export default function reducer(state = initialData, action) {
             return { ...state, fetching: false, error: action.payload }
         case GET_LOCATIONS_FILTERS_SUCCESS:
             return { ...state, filtered: action.payload, fetching: false }
+        case REMOVE_FILTERED:
+            return { ...state, filtered: action.payload }
         default:
             return state
     }
@@ -86,7 +90,15 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
 
         })
     })
+}
 
+export let removeSearchLocationsAction = () => (dispatch, getState) => {
+    let filtered = [];
+
+    dispatch({
+        type: REMOVE_FILTERED,
+        payload: filtered
+    })
 }
 
 export let getLocationsAction = () => (dispatch, getState) => {

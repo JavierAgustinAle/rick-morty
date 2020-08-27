@@ -13,6 +13,7 @@ let GET_FILTERS = 'GET_FILTERS';
 let GET_FILTERS_ERROR = 'GET_FILTERS_ERROR';
 let GET_FILTERS_SUCCESS = 'GET_FILTERS_SUCCESS';
 
+let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
 let initialData = {
     fetching: false,
@@ -37,6 +38,8 @@ export default function reducer(state = initialData, action) {
             return { ...state, fetching: false, error: action.payload }
         case GET_FILTERS_SUCCESS:
             return { ...state, filtered: action.payload, fetching: false }
+        case REMOVE_FILTERED:
+            return { ...state, filtered: action.payload }
         default:
             return state
     }
@@ -83,6 +86,18 @@ export let getCharFiltersAction = (searchName, searchType) => (dispatch, getStat
     })
 
 }
+
+export let removeSearchCharAction = () => (dispatch, getState) => {
+    let filtered = []
+
+    dispatch({
+        type: REMOVE_FILTERED,
+        payload: filtered
+    })
+
+
+}
+
 
 export let getCharactersAction = () => (dispatch, getState) => {
     let query = gql`
