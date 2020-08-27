@@ -40,27 +40,25 @@ const SearchBar = ({ title,
 
     return (
         <>
-            <form>
-                <div>
-                    {
-                        title === 'episodes'
-                            ? <input className="form-control"
-                                type="text"
-                                placeholder={`Search ${title} name`}
-                                aria-label="Search"
-                                onChange={searchInfo}
-                            />
-                            : <input className="form-control"
-                                type="text"
-                                placeholder={`Search ${title} name or type`}
-                                aria-label="Search"
-                                onChange={searchInfo}
-                            />
-                    }
-
-
-                </div>
-            </form>
+            <div>
+                {
+                    title === 'episodes'
+                        ? <input className="form-control"
+                            type="text"
+                            placeholder={`Search ${title} name`}
+                            aria-label="Search"
+                            onChange={searchInfo}
+                            onKeyPress={(e) => { if (e.keyCode === 13) return false }}
+                        />
+                        : <input className="form-control"
+                            type="text"
+                            placeholder={`Search ${title} name or type`}
+                            aria-label="Search"
+                            onChange={searchInfo}
+                            onKeyPress={(e) => { if (e.keyCode === 13) return false }}
+                        />
+                }
+            </div>
         </>
     )
 
