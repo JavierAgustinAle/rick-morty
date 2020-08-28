@@ -14,10 +14,15 @@ let GET_FILTERS_EPISODES_SUCCESS = 'GET_FILTERS_EPISODES_SUCCESS';
 
 let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
+let UPDATE_PAGE = 'UPDATE_PAGE';
+
 let initialData = {
     fetching: false,
     array: [],
-    filtered: []
+    filtered: [],
+    nextPage: 1,
+    prevPage: 0,
+    totalPages: 0
 }
 
 
@@ -39,6 +44,11 @@ export default function reducer(state = initialData, action) {
             return { ...state, filtered: action.payload, fetching: false }
         case REMOVE_FILTERED:
             return { ...state, filtered: action.payload }
+        case UPDATE_PAGE:
+            return {
+                ...state, nextPage: action.payload.next,
+                prevPage: action.payload.prev, totalPages: action.payload.total
+            }
         default:
             return state
     }
@@ -103,27 +113,35 @@ export let removeSearchEpisodeAction = () => (dispatch, getState) => {
 
 export let getEpisodesAction = () => (dispatch, getState) => {
     let query = gql`
-        {
-            episodes{
-                results{
-                  id
-                  name
-                  episode
-                  air_date
-                  characters{
-                    id
-                    name
-                  }
-                }
-              }
+    query ($page: Int){
+        episodes(page: $page){
+          info{
+            pages
+            next
+            prev
+          }
+          results{
+            id
+            name
+            episode
+            air_date
+            characters{
+               id
+               name
+            }
+          }
         }
+      }
     `
     dispatch({
         type: GET_EPISODES
     })
 
+    let { nextPage } = getState().episodes
+
     return client.query({
-        query
+        query,
+        variables: { page: nextPage }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -141,8 +159,14 @@ export let getEpisodesAction = () => (dispatch, getState) => {
             type: GET_EPISODES_SUCCESS,
             payload: data.episodes.results
         })
-
-
+        dispatch({
+            type: UPDATE_PAGE,
+            payload: {
+                next: data.episodes.info.next ? data.episodes.info.next : null,
+                prev: data.episodes.info.prev ? data.episodes.info.prev : null,
+                total: data.episodes.info.pages
+            }
+        })
     })
 
 }

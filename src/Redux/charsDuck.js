@@ -15,10 +15,15 @@ let GET_FILTERS_SUCCESS = 'GET_FILTERS_SUCCESS';
 
 let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
+let UPDATE_PAGE = 'UPDATE_PAGE';
+
 let initialData = {
     fetching: false,
     array: [],
-    filtered: []
+    filtered: [],
+    nextPage: 1,
+    prevPage: 0,
+    totalPages: 0
 }
 
 
@@ -40,6 +45,11 @@ export default function reducer(state = initialData, action) {
             return { ...state, filtered: action.payload, fetching: false }
         case REMOVE_FILTERED:
             return { ...state, filtered: action.payload }
+        case UPDATE_PAGE:
+            return {
+                ...state, nextPage: action.payload.next,
+                prevPage: action.payload.prev, totalPages: action.payload.total
+            }
         default:
             return state
     }
@@ -101,28 +111,33 @@ export let removeSearchCharAction = () => (dispatch, getState) => {
 
 export let getCharactersAction = () => (dispatch, getState) => {
     let query = gql`
-        query ($page: Int){
-            characters(page: $page){
-            results{
-                id
-                name
-                image
-                type
-                gender
-                species
-            }
-         }
+    query ($page: Int){
+        characters(page: $page){
+          info{
+            pages
+            next
+            prev
+          }
+          results{
+            id
+            name
+            image
+            type
+            gender
+            species
+          }
         }
+      }
     `
     dispatch({
         type: GET_CHARACTERS
     })
 
-    let pageInitial = Math.floor(Math.random() * (34 - 1)) + 1;
+    let { nextPage } = getState().characters
 
     return client.query({
         query,
-        variables: { page: pageInitial }
+        variables: { page: nextPage }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -134,7 +149,14 @@ export let getCharactersAction = () => (dispatch, getState) => {
         dispatch({
             type: GET_CHARACTERS_SUCCESS,
             payload: data.characters.results
-
+        })
+        dispatch({
+            type: UPDATE_PAGE,
+            payload: {
+                next: data.characters.info.next ? data.characters.info.next : null,
+                prev: data.characters.info.prev ? data.characters.info.prev : null,
+                total: data.characters.info.pages
+            }
         })
     })
 

@@ -14,10 +14,15 @@ let GET_LOCATIONS_FILTERS_SUCCESS = 'GET_LOCATIONS_FILTERS_SUCCESS';
 
 let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
+let UPDATE_PAGE = 'UPDATE_PAGE';
+
 let initialData = {
     fetching: false,
     array: [],
-    filtered: []
+    filtered: [],
+    nextPage: 1,
+    prevPage: 0,
+    totalPages: 0
 }
 
 // Reducer
@@ -38,6 +43,11 @@ export default function reducer(state = initialData, action) {
             return { ...state, filtered: action.payload, fetching: false }
         case REMOVE_FILTERED:
             return { ...state, filtered: action.payload }
+        case UPDATE_PAGE:
+            return {
+                ...state, nextPage: action.payload.next,
+                prevPage: action.payload.prev, totalPages: action.payload.total
+            }
         default:
             return state
     }
@@ -103,27 +113,35 @@ export let removeSearchLocationsAction = () => (dispatch, getState) => {
 
 export let getLocationsAction = () => (dispatch, getState) => {
     let query = gql`
-        {
-            locations{
-                results{
-                  id
-                  name
-                  type
-                  dimension
-                  residents{
-                    id
-                    name
-                  }
+        query ($page: Int){
+            locations(page: $page){
+            info{
+                pages
+                next
+                prev
+            }
+            results{
+                id
+                name
+                type
+                dimension
+                residents{
+                id
+                name
                 }
-              }
+            }
+            }
         }
     `
     dispatch({
         type: GET_LOCATIONS
     })
 
+    let { nextPage } = getState().locations
+
     return client.query({
-        query
+        query,
+        variables: { page: nextPage }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -142,10 +160,15 @@ export let getLocationsAction = () => (dispatch, getState) => {
                 type: GET_LOCATIONS_SUCCESS,
                 payload: data.locations.results
             })
+            dispatch({
+                type: UPDATE_PAGE,
+                payload: {
+                    next: data.locations.info.next ? data.locations.info.next : null,
+                    prev: data.locations.info.prev ? data.locations.info.prev : null,
+                    total: data.locations.info.pages
+                }
+            })
         }
-
-
-
     })
 
 }

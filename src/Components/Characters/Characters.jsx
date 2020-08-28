@@ -2,9 +2,10 @@ import React from 'react';
 // Componets
 import SearchBar from '../SearchBar/SearchBar';
 import CharCard from '../CharCard/CharCard';
-
+import Pagination from '../Pagination/Pagination';
 // Redux
 import { connect } from 'react-redux';
+
 
 const Characters = ({ initial, filtered }) => {
 
@@ -39,7 +40,9 @@ const Characters = ({ initial, filtered }) => {
                         ))
                 }
             </div>
-
+            <Pagination
+                title={title}
+            />
         </>
     )
 }
