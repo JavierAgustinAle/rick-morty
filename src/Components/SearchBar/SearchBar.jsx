@@ -19,22 +19,29 @@ const SearchBar = ({ title,
 
         if (target.length > 2) {
             if (title === 'characters') {
+                let search = document.getElementById('searchType').value
+                search === 'name' ?
+                    //Filter by name
+                    getCharFiltersAction(target, '')
+                    :
+                    //Filter by type
+                    getCharFiltersAction('', target);
 
-                //Filter by type
-                //getCharFiltersAction('', target);
 
-                //Filter by name
-                getCharFiltersAction(target, '');
             }
             if (title === 'episodes') {
                 getEpisodesFiltersAction(target);
             }
             if (title === 'locations') {
-                //Filter by type
-                //getLocationsFiltersAction('', target);
+                let search = document.getElementById('searchType').value
+                search === 'name' ?
+                    //Filter by name
+                    getLocationsFiltersAction(target, '')
+                    :
+                    //Filter by type
+                    getLocationsFiltersAction('', target);
 
-                //Filter by name
-                getLocationsFiltersAction(target, '');
+
             }
         }
     }
@@ -57,6 +64,7 @@ const SearchBar = ({ title,
     return (
         <>
             <div className="pb-2">
+
                 {
                     title === 'episodes'
                         ?
@@ -68,14 +76,21 @@ const SearchBar = ({ title,
                             onKeyPress={(e) => { if (e.keyCode === 13) return false }}
                             id="input-episodes"
                         />
-                        : <input className="form-control"
-                            type="text"
-                            placeholder={`Search ${title} name or type`}
-                            aria-label="Search"
-                            onChange={searchInfo}
-                            onKeyPress={(e) => { if (e.keyCode === 13) return false }}
-                            id="input"
-                        />
+                        :
+                        <>
+                            <select onChange={clearSearch} className="custom-select col-2 pb-2" id="searchType">
+                                <option value="name">Name</option>
+                                <option value="type">Type</option>
+                            </select>
+                            <input className="form-control pt-2"
+                                type="text"
+                                placeholder={`Search ${title}`}
+                                aria-label="Search"
+                                onChange={searchInfo}
+                                onKeyPress={(e) => { if (e.keyCode === 13) return false }}
+                                id="input"
+                            />
+                        </>
                 }
                 <button className="btn btn-sm float-right" onClick={clearSearch}>Clear Search</button>
             </div>
