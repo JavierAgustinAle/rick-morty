@@ -67,6 +67,7 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
               residents{
                 id
                 name
+                image
               }
             }
           }
@@ -128,6 +129,7 @@ export let getLocationsAction = (direction) => (dispatch, getState) => {
                 residents{
                 id
                 name
+                image
                 }
             }
             }

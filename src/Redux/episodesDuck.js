@@ -68,6 +68,7 @@ export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
               characters{
                 id
                 name
+                image
               }
             }
           }
@@ -128,6 +129,7 @@ export let getEpisodesAction = (direction) => (dispatch, getState) => {
             characters{
                id
                name
+               image
             }
           }
         }

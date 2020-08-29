@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // Modal
-import CharModal from '../ModalChar/ModalChar';
+import CharModal from '../Modals/ModalChar';
 
 
 const CharCard = ({ data }) => {
