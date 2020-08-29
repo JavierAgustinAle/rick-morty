@@ -14,15 +14,15 @@ let GET_FILTERS_EPISODES_SUCCESS = 'GET_FILTERS_EPISODES_SUCCESS';
 
 let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
-let UPDATE_PAGE = 'UPDATE_PAGE';
+let UPDATE_PAGE_EPISODE = 'UPDATE_PAGE_EPISODE';
 
 let initialData = {
     fetching: false,
     array: [],
     filtered: [],
-    nextPage: 1,
-    prevPage: 0,
-    totalPages: 0
+    nextPageEpisod: 1,
+    prevPageEpisod: 0,
+    totalPagesEpisod: 0
 }
 
 
@@ -44,10 +44,10 @@ export default function reducer(state = initialData, action) {
             return { ...state, filtered: action.payload, fetching: false }
         case REMOVE_FILTERED:
             return { ...state, filtered: action.payload }
-        case UPDATE_PAGE:
+        case UPDATE_PAGE_EPISODE:
             return {
-                ...state, nextPage: action.payload.next,
-                prevPage: action.payload.prev, totalPages: action.payload.total
+                ...state, nextPageEpisod: action.payload.next,
+                prevPageEpisod: action.payload.prev, totalPagesEpisod: action.payload.total
             }
         default:
             return state
@@ -137,11 +137,11 @@ export let getEpisodesAction = () => (dispatch, getState) => {
         type: GET_EPISODES
     })
 
-    let { nextPage } = getState().episodes
+    let { nextPageEpisod } = getState().episodes
 
     return client.query({
         query,
-        variables: { page: nextPage }
+        variables: { page: nextPageEpisod }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -160,7 +160,7 @@ export let getEpisodesAction = () => (dispatch, getState) => {
             payload: data.episodes.results
         })
         dispatch({
-            type: UPDATE_PAGE,
+            type: UPDATE_PAGE_EPISODE,
             payload: {
                 next: data.episodes.info.next ? data.episodes.info.next : null,
                 prev: data.episodes.info.prev ? data.episodes.info.prev : null,

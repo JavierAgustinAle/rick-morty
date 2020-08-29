@@ -14,15 +14,15 @@ let GET_LOCATIONS_FILTERS_SUCCESS = 'GET_LOCATIONS_FILTERS_SUCCESS';
 
 let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
-let UPDATE_PAGE = 'UPDATE_PAGE';
+let UPDATE_PAGE_LOCATIONS = 'UPDATE_PAGE_LOCATIONS';
 
 let initialData = {
     fetching: false,
     array: [],
     filtered: [],
-    nextPage: 1,
-    prevPage: 0,
-    totalPages: 0
+    nextPageLoca: 1,
+    prevPageLoca: 0,
+    totalPagesLoca: 0
 }
 
 // Reducer
@@ -43,10 +43,10 @@ export default function reducer(state = initialData, action) {
             return { ...state, filtered: action.payload, fetching: false }
         case REMOVE_FILTERED:
             return { ...state, filtered: action.payload }
-        case UPDATE_PAGE:
+        case UPDATE_PAGE_LOCATIONS:
             return {
-                ...state, nextPage: action.payload.next,
-                prevPage: action.payload.prev, totalPages: action.payload.total
+                ...state, nextPageLoca: action.payload.nextLoc,
+                prevPageLoca: action.payload.prevLoc, totalPagesLoca: action.payload.totalLoc
             }
         default:
             return state
@@ -137,11 +137,11 @@ export let getLocationsAction = () => (dispatch, getState) => {
         type: GET_LOCATIONS
     })
 
-    let { nextPage } = getState().locations
+    let { nextPageLoca } = getState().locations
 
     return client.query({
         query,
-        variables: { page: nextPage }
+        variables: { page: nextPageLoca }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -161,13 +161,16 @@ export let getLocationsAction = () => (dispatch, getState) => {
                 payload: data.locations.results
             })
             dispatch({
-                type: UPDATE_PAGE,
+                type: UPDATE_PAGE_LOCATIONS,
                 payload: {
-                    next: data.locations.info.next ? data.locations.info.next : null,
-                    prev: data.locations.info.prev ? data.locations.info.prev : null,
-                    total: data.locations.info.pages
+                    nextLoc: data.locations.info.next ? data.locations.info.next : null,
+                    prevLoc: data.locations.info.prev ? data.locations.info.prev : null,
+                    totalLoc: data.locations.info.pages
                 }
             })
+            console.log(data.locations.info.next)
+            console.log(data.locations.info.prev)
+            console.log(data.locations.info.pages)
         }
     })
 
