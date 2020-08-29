@@ -111,7 +111,7 @@ export let removeSearchEpisodeAction = () => (dispatch, getState) => {
     })
 }
 
-export let getEpisodesAction = () => (dispatch, getState) => {
+export let getEpisodesAction = (direction) => (dispatch, getState) => {
     let query = gql`
     query ($page: Int){
         episodes(page: $page){
@@ -136,12 +136,19 @@ export let getEpisodesAction = () => (dispatch, getState) => {
     dispatch({
         type: GET_EPISODES
     })
-
-    let { nextPageEpisod } = getState().episodes
+    let pageToGo;
+    if (direction !== undefined) {
+        let { prevPageEpisod } = getState().episodes
+        pageToGo = prevPageEpisod;
+    } else {
+        let { nextPageEpisod } = getState().episodes
+        pageToGo = nextPageEpisod;
+    }
 
     return client.query({
         query,
-        variables: { page: nextPageEpisod }
+
+        variables: { page: pageToGo }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({

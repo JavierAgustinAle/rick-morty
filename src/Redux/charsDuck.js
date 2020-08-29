@@ -109,7 +109,7 @@ export let removeSearchCharAction = () => (dispatch, getState) => {
 }
 
 
-export let getCharactersAction = () => (dispatch, getState) => {
+export let getCharactersAction = (direction) => (dispatch, getState) => {
     let query = gql`
     query ($page: Int){
         characters(page: $page){
@@ -133,11 +133,19 @@ export let getCharactersAction = () => (dispatch, getState) => {
         type: GET_CHARACTERS
     })
 
-    let { nextPage } = getState().characters
+    let pageToGo;
+    if (direction !== undefined) {
+        let { prevPage } = getState().characters
+        pageToGo = prevPage;
+    } else {
+        let { nextPage } = getState().characters
+        pageToGo = nextPage;
+    }
+
 
     return client.query({
         query,
-        variables: { page: nextPage }
+        variables: { page: pageToGo }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({

@@ -2,6 +2,7 @@ import React from 'react';
 // Components
 import SearchBar from '../SearchBar/SearchBar';
 import InfoCard from '../InfoCard/InfoCard';
+import Pagination from '../Pagination/Pagination';
 // Redux
 import { connect } from 'react-redux';
 
@@ -39,7 +40,13 @@ const Episodes = ({ initial, filtered }) => {
                         ))
                 }
             </div>
-
+            {
+                filtered < 1 ?
+                    <Pagination
+                        title={title}
+                    />
+                    : ''
+            }
         </>
     )
 }

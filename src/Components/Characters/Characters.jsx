@@ -40,9 +40,13 @@ const Characters = ({ initial, filtered }) => {
                         ))
                 }
             </div>
-            <Pagination
-                title={title}
-            />
+            {
+                filtered < 1 ?
+                    <Pagination
+                        title={title}
+                    />
+                    : ''
+            }
         </>
     )
 }

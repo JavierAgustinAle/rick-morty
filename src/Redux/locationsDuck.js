@@ -111,7 +111,7 @@ export let removeSearchLocationsAction = () => (dispatch, getState) => {
     })
 }
 
-export let getLocationsAction = () => (dispatch, getState) => {
+export let getLocationsAction = (direction) => (dispatch, getState) => {
     let query = gql`
         query ($page: Int){
             locations(page: $page){
@@ -137,11 +137,18 @@ export let getLocationsAction = () => (dispatch, getState) => {
         type: GET_LOCATIONS
     })
 
-    let { nextPageLoca } = getState().locations
+    let pageToGo;
+    if (direction !== undefined) {
+        let { prevPageLoca } = getState().locations
+        pageToGo = prevPageLoca;
+    } else {
+        let { nextPageLoca } = getState().locations
+        pageToGo = nextPageLoca;
+    }
 
     return client.query({
         query,
-        variables: { page: nextPageLoca }
+        variables: { page: pageToGo }
     }).then(({ data, error }) => {
         if (error) {
             dispatch({
@@ -168,9 +175,6 @@ export let getLocationsAction = () => (dispatch, getState) => {
                     totalLoc: data.locations.info.pages
                 }
             })
-            console.log(data.locations.info.next)
-            console.log(data.locations.info.prev)
-            console.log(data.locations.info.pages)
         }
     })
 
