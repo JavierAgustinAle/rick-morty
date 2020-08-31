@@ -1,4 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicacion de Rick & Morty. :rocket:
+====
+
+### En esta aplicacion el usuario puede:
+
+1. Ver los distintos Personajes de la serie.
+2. Ver los episodios que posee la serie.
+3. Ver las diferentes locaciones que aparecen en la serie.
+
+
+## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale).
+
+
+### Screenshots
+
+> Pagina de inicio.
+![Inicio](https://user-images.githubusercontent.com/39749087/91740082-2ca0bd00-eb89-11ea-8551-a00b05345729.png)
+
+---
+> Card de un personaje.
+![Card](https://user-images.githubusercontent.com/39749087/91740275-77223980-eb89-11ea-8bb4-7ab0b3285a60.png)
+---
+> Modal con mas info de un personaje.
+![ModalChar](https://user-images.githubusercontent.com/39749087/91740472-b6508a80-eb89-11ea-9e8d-3b2401fd73bf.png)
+---
+#### Proyecto realizado utilizando [Create React App](https://github.com/facebook/create-react-app).
+
+yarn packages | Installation
+---------------- | -------------
+Redux   | yarn add redux
+React-redux | yarn add react-redux
+Redux-thunk   | yarn add redux-thunk
+Redux-devtools | yarn add redux-devtools
+Bootstrap   | yarn add bootstrap
+React-router-dom | yarn add react-router-dom
+React-Apollo   | yarn add react-apollo
+Apollo-boost | yarn add apollo-boost
+GraphQL   |  yarn add graphql
+PropTypes | yarn add prop-types
+
+
 
 ## Available Scripts
 
