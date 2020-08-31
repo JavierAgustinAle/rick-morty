@@ -11,9 +11,10 @@ Aplicacion de Rick & Morty. :rocket:
 ## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale).
 
 
-#### Screenshots
+### Screenshots
 
-
+> Pagina de inicio.
+![Inicio](https://user-images.githubusercontent.com/39749087/91740082-2ca0bd00-eb89-11ea-8551-a00b05345729.png)
 
 
 #### Proyecto realizado utilizando [Create React App](https://github.com/facebook/create-react-app).
