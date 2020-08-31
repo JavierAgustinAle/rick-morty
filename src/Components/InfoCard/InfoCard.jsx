@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import './InfoCard.css'
 // Modal
 import ModalLocation from '../Modals/ModalLocation';
 import ModalEpisode from '../Modals/ModalEpisode';
@@ -22,10 +23,10 @@ const InfoCard = ({ data, title }) => {
                     <div className="card text-white bg-secondary h-100 mx-auto" style={{ width: '18rem' }}>
                         <div className="card-body">
                             <h3 className="card-title text-center">{data.name}</h3><br></br>
-                            <p>{data.episode}</p>
+                            <p>Episode: {data.episode}</p>
                         </div>
                         <div className="card-footer text-right">
-                            <button className="btn btn-sm btn-light" onClick={handleShow}>+</button>
+                            <button className="btn btn-sm btn-info" onClick={handleShow}><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
@@ -47,10 +48,14 @@ const InfoCard = ({ data, title }) => {
                     <div className="card text-white bg-secondary h-100 mx-auto" style={{ width: '18rem' }}>
                         <div className="card-body">
                             <h3 className="card-title text-center">{data.name}</h3>
-                            <p>{data.dimension}</p>
+                            {
+                                data.dimension === 'unknown' ?
+                                    <p>Dimension unknown</p>
+                                    : <p>{data.dimension}</p>
+                            }
                         </div>
                         <div className="card-footer text-right">
-                            <button className="btn btn-sm btn-light" onClick={handleShow}>+</button>
+                            <button className="btn btn-sm btn-info" onClick={handleShow}><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>

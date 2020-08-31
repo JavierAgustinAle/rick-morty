@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Modal.css';
 // Modal
 import Modal from 'react-modal';
 
@@ -20,7 +21,7 @@ const ModalLocation = ({ data, onHide, show }) => {
             }}>
             <div className="card mb-3 text-white bg-secondary">
                 <div className="text-right  pb-1">
-                    <button className="btn btn-sm btn-danger" onClick={onHide}>Close</button>
+                    <button className="btn btn-sm btn-danger" onClick={onHide}><i class="fa fa-times"></i></button>
                 </div>
                 <div className="card-body">
                     <h1 className="card-title text-center">{data.name}</h1>
