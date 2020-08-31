@@ -6,6 +6,7 @@ import Header from './Components/Header/Header'
 import Characters from '../src/Components/Characters/Characters';
 import Locations from '../src/Components/Locations/Locations';
 import Episodes from '../src/Components/Episodes/Episodes';
+import Footer from '../src/Components/Footer/Footer';
 
 const AppRoutes = () => {
     return (
@@ -27,8 +28,8 @@ const AppRoutes = () => {
                         <span className="text-danger">Pagina no encontrada.</span>
                     </div>
                 </Route>
-
             </Switch>
+            <Footer />
         </Router>
     )
 }
