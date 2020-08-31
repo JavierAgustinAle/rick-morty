@@ -1,6 +1,8 @@
 Aplicacion de Rick & Morty. :rocket:
 ====
 
+ #### Ver en funcionamiento --> [Rick&Morty React](https://javieragustinale.github.io/rick-morty) :mag:
+
 ### En esta aplicacion el usuario puede:
 
 1. Ver los distintos Personajes de la serie.
@@ -8,7 +10,7 @@ Aplicacion de Rick & Morty. :rocket:
 3. Ver las diferentes locaciones que aparecen en la serie.
 
 
-## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale).
+## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale) :computer:
 
 
 ### Screenshots
@@ -37,6 +39,8 @@ React-Apollo   | yarn add react-apollo
 Apollo-boost | yarn add apollo-boost
 GraphQL   |  yarn add graphql
 PropTypes | yarn add prop-types
+React-Modal | yarn add react-modal
+Gh-Pages | yarn add gh-pages
 
 
 
