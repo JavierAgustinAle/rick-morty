@@ -1,4 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicacion de Rick & Morty. :rocket:
+====
+
+### En esta aplicacion el usuario puede:
+
+1. Ver los distintos Personajes de la serie.
+2. Ver los episodios que posee la serie.
+3. Ver las diferentes locaciones que aparecen en la serie.
+
+
+## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale).
+
+
+#### Screenshots
+
+
+
+
+#### Proyecto realizado utilizando [Create React App](https://github.com/facebook/create-react-app).
+
+yarn packages | Installation
+---------------- | -------------
+Redux   | yarn add redux
+React-redux | yarn add react-redux
+Redux-thunk   | yarn add redux-thunk
+Redux-devtools | yarn add redux-devtools
+Bootstrap   | yarn add bootstrap
+React-router-dom | yarn add react-router-dom
+React-Apollo   | yarn add react-apollo
+Apollo-boost | yarn add apollo-boost
+GraphQL   |  yarn add graphql
+PropTypes | yarn add prop-types
+
+
 
 ## Available Scripts
 
