@@ -7,8 +7,8 @@ const Header = () => {
 
     return (
 
-        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
-            <div className="collapse navbar-collapse">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-expand-md navbar-dark bg-dark ">
+            <div className="mx-auto">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <NavLink className="nav-link" exact to="/" activeClassName="activo"> Characters </NavLink>
