@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Modal
 import Modal from 'react-modal';
 
@@ -35,5 +36,17 @@ const ModalChar = ({ data, onHide, show }) => {
         </Modal>
     );
 };
+
+ModalChar.propTypes = {
+    onHide: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        species: PropTypes.string.isRequired,
+        type: PropTypes.string
+    })
+}
 
 export default ModalChar;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Components
 import SearchBar from '../SearchBar/SearchBar';
 import InfoCard from '../InfoCard/InfoCard';
@@ -56,6 +57,11 @@ function mapState(state) {
         initial: state.episodes.array,
         filtered: state.episodes.filtered
     }
+}
+
+Episodes.propTypes = {
+    initial: PropTypes.array.isRequired,
+    filtered: PropTypes.array
 }
 
 export default connect(mapState)(Episodes);

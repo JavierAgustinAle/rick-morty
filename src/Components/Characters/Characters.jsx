@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Componets
 import SearchBar from '../SearchBar/SearchBar';
 import CharCard from '../CharCard/CharCard';
@@ -59,5 +60,9 @@ function mapState(state) {
     }
 }
 
+Characters.propTypes = {
+    initial: PropTypes.array.isRequired,
+    filtered: PropTypes.array
+}
 
 export default connect(mapState)(Characters);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Modal
 import Modal from 'react-modal';
 
@@ -30,14 +31,12 @@ const ModalEpisode = ({ data, onHide, show }) => {
                     <h3 className="text-center">Characters</h3>
                     <div className="card-deck">
                         {data.characters.map(e => (
-                            <div className="card">
-                                <img class="card-img-top" src={e.image} alt={e.name} />
+                            <div className="card" key={e.name}>
+                                <img className="card-img-top" src={e.image} alt={e.name} />
                                 <div className="card-body text-dark">
                                     <h5 className="card-title text-center">{e.name}</h5>
                                 </div>
                             </div>
-
-
                         ))}
                     </div>
                 </div>
@@ -46,6 +45,17 @@ const ModalEpisode = ({ data, onHide, show }) => {
 
         </Modal>
     )
+}
+
+ModalEpisode.propTypes = {
+    onHide: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+        air_date: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        episode: PropTypes.string.isRequired,
+        characters: PropTypes.array.isRequired
+    })
 }
 
 export default ModalEpisode; 

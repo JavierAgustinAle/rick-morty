@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Modal
 import Modal from 'react-modal';
 
@@ -30,8 +31,8 @@ const ModalLocation = ({ data, onHide, show }) => {
                     <h5 className="text-center">Residents</h5>
                     <div className="card-deck">
                         {data.residents.map(e => (
-                            <div className="card">
-                                <img class="card-img-top" src={e.image} alt={e.name} />
+                            <div className="card" key={e.name}>
+                                <img className="card-img-top" src={e.image} alt={e.name} />
                                 <div className="card-body text-dark">
                                     <h5 className="card-title text-center">{e.name}</h5>
                                 </div>
@@ -48,4 +49,14 @@ const ModalLocation = ({ data, onHide, show }) => {
     )
 }
 
+ModalLocation.propTypes = {
+    onHide: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+        dimension: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.string,
+        residents: PropTypes.array.isRequired
+    })
+}
 export default ModalLocation; 

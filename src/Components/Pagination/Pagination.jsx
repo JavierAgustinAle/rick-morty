@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
@@ -125,6 +126,22 @@ function mapState(state) {
         locationPrev: state.locations.prevPageLoca,
 
     }
+}
+
+Pagination.propTypes = {
+    charsTotal: PropTypes.number.isRequired,
+    episodTotal: PropTypes.number.isRequired,
+    locationTotal: PropTypes.number.isRequired,
+    charsNext: PropTypes.number,
+    episodNext: PropTypes.number,
+    locationNext: PropTypes.number,
+    charsPrev: PropTypes.number,
+    episodPrev: PropTypes.number,
+    locationPrev: PropTypes.number,
+    getCharactersAction: PropTypes.func.isRequired,
+    getEpisodesAction: PropTypes.func.isRequired,
+    getLocationsAction: PropTypes.func.isRequired
+
 }
 
 export default connect(mapState, { getCharactersAction, getEpisodesAction, getLocationsAction })(Pagination);

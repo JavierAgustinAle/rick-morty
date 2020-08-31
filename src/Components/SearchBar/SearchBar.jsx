@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
 import { getCharFiltersAction, removeSearchCharAction } from '../../Redux/charsDuck';
@@ -78,7 +78,7 @@ const SearchBar = ({ title,
                         />
                         :
                         <>
-                            <select onChange={clearSearch} className="custom-select col-2 pb-2" id="searchType">
+                            <select onChange={clearSearch} className="custom-select col-lg-4 col-md-4 col-sm-5 pb-2" id="searchType">
                                 <option value="name">Name</option>
                                 <option value="type">Type</option>
                             </select>
@@ -102,6 +102,18 @@ const SearchBar = ({ title,
 // Entrega todo lo que tenga el store
 function mapState(state) {
     return {}
+}
+
+SearchBar.propTypes = {
+    title: PropTypes.string.isRequired,
+
+    getCharFiltersAction: PropTypes.func.isRequired,
+    getEpisodesFiltersAction: PropTypes.func.isRequired,
+    getLocationsFiltersAction: PropTypes.func.isRequired,
+    removeSearchCharAction: PropTypes.func.isRequired,
+    removeSearchEpisodeAction: PropTypes.func.isRequired,
+    removeSearchLocationsAction: PropTypes.func.isRequired
+
 }
 
 export default connect(mapState, {
