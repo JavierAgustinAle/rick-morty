@@ -21,7 +21,7 @@ const ModalChar = ({ data, onHide, show }) => {
                 <div className="text-right pb-1">
                     <button className="btn btn-sm btn-danger" onClick={onHide}>Close</button>
                 </div>
-                <img className="rounded mx-auto card-img-top" src={data.image} alt={data.name} />
+                <img className="card-img-top rounded mx-auto w-25" src={data.image} alt={data.name} />
                 <div className="card-body">
                     <h4 className="card-title text-center">{data.name}</h4>
                     <ul>
