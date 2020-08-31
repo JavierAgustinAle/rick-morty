@@ -1,7 +1,7 @@
 Aplicacion de Rick & Morty. :rocket:
 ====
 
- #### Ver en funcionamiento --> [Rick&Morty React](https://javieragustinale.github.io/rick-morty)
+ #### Ver en funcionamiento --> [Rick&Morty React](https://javieragustinale.github.io/rick-morty) :mag:
 
 ### En esta aplicacion el usuario puede:
 
@@ -10,7 +10,7 @@ Aplicacion de Rick & Morty. :rocket:
 3. Ver las diferentes locaciones que aparecen en la serie.
 
 
-## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale)
+## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale) :computer:
 
 
 ### Screenshots
