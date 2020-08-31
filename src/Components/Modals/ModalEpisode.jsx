@@ -19,8 +19,8 @@ const ModalEpisode = ({ data, onHide, show }) => {
                 }
             }}>
             <div className="card mb-3 text-white bg-secondary">
-                <div className="text-right">
-                    <button className="btn btn-sm btn-danger col-1" onClick={onHide}>Close</button>
+                <div className="text-right  pb-1">
+                    <button className="btn btn-sm btn-danger" onClick={onHide}>Close</button>
                 </div>
                 <div className="card-body">
                     <h1 className="card-title text-center">{data.name}</h1>
