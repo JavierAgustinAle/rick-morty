@@ -23,7 +23,8 @@ let initialData = {
     filtered: [],
     nextPage: 1,
     prevPage: 0,
-    totalPages: 0
+    totalPages: 0,
+    error: false
 }
 
 
@@ -40,11 +41,11 @@ export default function reducer(state = initialData, action) {
         case GET_FILTERS:
             return { ...state, fetching: true }
         case GET_FILTERS_ERROR:
-            return { ...state, fetching: false, error: action.payload }
+            return { ...state, fetching: false, error: action.payload, filtered: [] }
         case GET_FILTERS_SUCCESS:
-            return { ...state, filtered: action.payload, fetching: false }
+            return { ...state, filtered: action.payload, fetching: false, error: false }
         case REMOVE_FILTERED:
-            return { ...state, filtered: action.payload }
+            return { ...state, filtered: action.payload, error: false }
         case UPDATE_PAGE:
             return {
                 ...state, nextPage: action.payload.next,
@@ -80,19 +81,18 @@ export let getCharFiltersAction = (searchName, searchType) => (dispatch, getStat
     return client.query({
         query,
         variables: { name: searchName, type: searchType }
-    }).then(({ data, errors }) => {
-        if (errors) {
-            dispatch({
-                type: GET_FILTERS_ERROR,
-                payload: errors.message
-            })
-            return
-        }
+    }).then(({ data }) => {
         dispatch({
             type: GET_FILTERS_SUCCESS,
             payload: data.characters.results
 
         })
+    }).catch((errors) => {
+        dispatch({
+            type: GET_FILTERS_ERROR,
+            payload: true
+        })
+        return
     })
 
 }
@@ -146,14 +146,7 @@ export let getCharactersAction = (direction) => (dispatch, getState) => {
     return client.query({
         query,
         variables: { page: pageToGo }
-    }).then(({ data, error }) => {
-        if (error) {
-            dispatch({
-                type: GET_CHARACTERS_ERROR,
-                payload: error
-            })
-            return
-        }
+    }).then(({ data }) => {
         dispatch({
             type: GET_CHARACTERS_SUCCESS,
             payload: data.characters.results
@@ -166,6 +159,13 @@ export let getCharactersAction = (direction) => (dispatch, getState) => {
                 total: data.characters.info.pages
             }
         })
+    }).catch((errors) => {
+        dispatch({
+            type: GET_CHARACTERS_ERROR,
+            payload: true
+        })
+        return
+
     })
 
 }

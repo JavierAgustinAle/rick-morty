@@ -22,7 +22,8 @@ let initialData = {
     filtered: [],
     nextPageEpisod: 1,
     prevPageEpisod: 0,
-    totalPagesEpisod: 0
+    totalPagesEpisod: 0,
+    errorEpiso: false
 }
 
 
@@ -33,17 +34,17 @@ export default function reducer(state = initialData, action) {
         case GET_EPISODES:
             return { ...state, fetching: true }
         case GET_EPISODES_ERROR:
-            return { ...state, fetching: false, error: action.payload }
+            return { ...state, fetching: false, errorEpiso: action.payload }
         case GET_EPISODES_SUCCESS:
-            return { ...state, array: action.payload, fetching: false }
+            return { ...state, array: action.payload, fetching: false, errorEpiso: false }
         case GET_FILTERS_EPISODES:
             return { ...state, fetching: true }
         case GET_FILTERS_EPISODES_ERROR:
-            return { ...state, fetching: false, error: action.payload }
+            return { ...state, fetching: false, errorEpiso: action.payload }
         case GET_FILTERS_EPISODES_SUCCESS:
-            return { ...state, filtered: action.payload, fetching: false }
+            return { ...state, filtered: action.payload, fetching: false, errorEpiso: false }
         case REMOVE_FILTERED:
-            return { ...state, filtered: action.payload }
+            return { ...state, filtered: action.payload, errorEpiso: false }
         case UPDATE_PAGE_EPISODE:
             return {
                 ...state, nextPageEpisod: action.payload.next,
@@ -81,14 +82,7 @@ export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
     return client.query({
         query,
         variables: { name: searchName }
-    }).then(({ data, error }) => {
-        if (error) {
-            dispatch({
-                type: GET_FILTERS_EPISODES_ERROR,
-                payload: error.data
-            })
-            return
-        }
+    }).then(({ data }) => {
         for (let i = 0; i < data.episodes.results.length; i++) {
             for (let x = 0; x < 5; x++) {
                 data.episodes.results[i].characters.splice(5, data.episodes.results[i].characters.length);
@@ -99,6 +93,13 @@ export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
             payload: data.episodes.results
 
         })
+    }).catch((errors) => {
+        dispatch({
+            type: GET_FILTERS_EPISODES_ERROR,
+            payload: true
+        })
+
+        return
     })
 
 }
@@ -151,14 +152,7 @@ export let getEpisodesAction = (direction) => (dispatch, getState) => {
         query,
 
         variables: { page: pageToGo }
-    }).then(({ data, error }) => {
-        if (error) {
-            dispatch({
-                type: GET_EPISODES_ERROR,
-                payload: error
-            })
-            return
-        }
+    }).then(({ data }) => {
         for (let i = 0; i < data.episodes.results.length; i++) {
             for (let x = 0; x < 5; x++) {
                 data.episodes.results[i].characters.splice(5, data.episodes.results[i].characters.length);
@@ -176,6 +170,13 @@ export let getEpisodesAction = (direction) => (dispatch, getState) => {
                 total: data.episodes.info.pages
             }
         })
+    }).catch((errors) => {
+        dispatch({
+            type: GET_EPISODES_ERROR,
+            payload: true
+        })
+
+        return
     })
 
 }

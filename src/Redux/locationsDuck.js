@@ -22,7 +22,8 @@ let initialData = {
     filtered: [],
     nextPageLoca: 1,
     prevPageLoca: 0,
-    totalPagesLoca: 0
+    totalPagesLoca: 0,
+    errorLoc: false
 }
 
 // Reducer
@@ -32,17 +33,17 @@ export default function reducer(state = initialData, action) {
         case GET_LOCATIONS:
             return { ...state, fetching: true }
         case GET_LOCATIONS_ERROR:
-            return { ...state, fetching: false, error: action.payload }
+            return { ...state, fetching: false, errorLoc: action.payload }
         case GET_LOCATIONS_SUCCESS:
-            return { ...state, array: action.payload, fetching: false }
+            return { ...state, array: action.payload, fetching: false, errorLoc: false }
         case GET_LOCATIONS_FILTERS:
             return { ...state, fetching: true }
         case GET_LOCATIONS_FILTERS_ERROR:
-            return { ...state, fetching: false, error: action.payload }
+            return { ...state, fetching: false, errorLoc: action.payload }
         case GET_LOCATIONS_FILTERS_SUCCESS:
-            return { ...state, filtered: action.payload, fetching: false }
+            return { ...state, filtered: action.payload, fetching: false, errorLoc: false }
         case REMOVE_FILTERED:
-            return { ...state, filtered: action.payload }
+            return { ...state, filtered: action.payload, errorLoc: false }
         case UPDATE_PAGE_LOCATIONS:
             return {
                 ...state, nextPageLoca: action.payload.nextLoc,
@@ -80,15 +81,7 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
     return client.query({
         query,
         variables: { name: searchName, type: searchType }
-    }).then(({ data, errors }) => {
-        if (errors) {
-            dispatch({
-                type: GET_LOCATIONS_FILTERS_ERROR,
-                payload: errors.message
-            })
-            return
-        }
-
+    }).then(({ data }) => {
         for (let i = 0; i < data.locations.results.length; i++) {
             for (let x = 0; x < 5; x++) {
                 data.locations.results[i].residents.splice(5, data.locations.results[i].residents.length);
@@ -100,6 +93,12 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
             payload: data.locations.results
 
         })
+    }).catch((errors) => {
+        dispatch({
+            type: GET_LOCATIONS_FILTERS_ERROR,
+            payload: true
+        })
+        return
     })
 }
 
@@ -152,32 +151,31 @@ export let getLocationsAction = (direction) => (dispatch, getState) => {
         query,
         variables: { page: pageToGo }
     }).then(({ data, error }) => {
-        if (error) {
-            dispatch({
-                type: GET_LOCATIONS_ERROR,
-                payload: error
-            })
-            return
-        } else {
-            for (let i = 0; i < data.locations.results.length; i++) {
-                for (let x = 0; x < 5; x++) {
-                    data.locations.results[i].residents.splice(5, data.locations.results[i].residents.length);
-                }
+        for (let i = 0; i < data.locations.results.length; i++) {
+            for (let x = 0; x < 5; x++) {
+                data.locations.results[i].residents.splice(5, data.locations.results[i].residents.length);
             }
-
-            dispatch({
-                type: GET_LOCATIONS_SUCCESS,
-                payload: data.locations.results
-            })
-            dispatch({
-                type: UPDATE_PAGE_LOCATIONS,
-                payload: {
-                    nextLoc: data.locations.info.next ? data.locations.info.next : null,
-                    prevLoc: data.locations.info.prev ? data.locations.info.prev : null,
-                    totalLoc: data.locations.info.pages
-                }
-            })
         }
+
+        dispatch({
+            type: GET_LOCATIONS_SUCCESS,
+            payload: data.locations.results
+        })
+        dispatch({
+            type: UPDATE_PAGE_LOCATIONS,
+            payload: {
+                nextLoc: data.locations.info.next ? data.locations.info.next : null,
+                prevLoc: data.locations.info.prev ? data.locations.info.prev : null,
+                totalLoc: data.locations.info.pages
+            }
+        })
+
+    }).catch((errors) => {
+        dispatch({
+            type: GET_LOCATIONS_ERROR,
+            payload: true
+        })
+        return
     })
 
 }

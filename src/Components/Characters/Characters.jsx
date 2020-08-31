@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import SearchBar from '../SearchBar/SearchBar';
 import CharCard from '../CharCard/CharCard';
 import Pagination from '../Pagination/Pagination';
+import NoData from '../NoData/NoData';
 // Redux
 import { connect } from 'react-redux';
 
 
-const Characters = ({ initial, filtered }) => {
+const Characters = ({ initial, filtered, error }) => {
 
     const title = 'characters';
     return (
@@ -18,34 +19,44 @@ const Characters = ({ initial, filtered }) => {
                 <SearchBar
                     title={title}
                 />
+                {
+                    error ?
+                        <div className="mx-auto"><NoData /></div>
+                        : ''
+                }
             </div>
+
             <br />
             <div className="row pl-2 pr-2">
                 {
-                    filtered.length < 1
-                        ?
-                        initial.map(e => (
-                            <CharCard
-                                key={e.id}
-                                data={e}
-                            />
+                    error === false ?
+                        filtered.length < 1
+                            ?
+                            initial.map(e => (
+                                <CharCard
+                                    key={e.id}
+                                    data={e}
+                                />
 
-                        ))
-                        :
-                        filtered.map(e => (
-                            <CharCard
-                                key={e.id}
-                                data={e}
-                            />
+                            ))
+                            :
+                            filtered.map(e => (
+                                <CharCard
+                                    key={e.id}
+                                    data={e}
+                                />
 
-                        ))
+                            ))
+                        : ''
                 }
             </div>
             {
-                filtered < 1 ?
-                    <Pagination
-                        title={title}
-                    />
+                error === false ?
+                    filtered < 1 ?
+                        <Pagination
+                            title={title}
+                        />
+                        : ''
                     : ''
             }
         </>
@@ -56,13 +67,15 @@ const Characters = ({ initial, filtered }) => {
 function mapState(state) {
     return {
         initial: state.characters.array,
-        filtered: state.characters.filtered
+        filtered: state.characters.filtered,
+        error: state.characters.error
     }
 }
 
 Characters.propTypes = {
     initial: PropTypes.array.isRequired,
-    filtered: PropTypes.array
+    filtered: PropTypes.array,
+    error: PropTypes.bool
 }
 
 export default connect(mapState)(Characters);

@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import SearchBar from '../SearchBar/SearchBar';
 import InfoCard from '../InfoCard/InfoCard';
 import Pagination from '../Pagination/Pagination';
+import NoData from '../NoData/NoData';
 
 // Redux
 import { connect } from 'react-redux';
 
-const Locations = ({ initial, filtered }) => {
+const Locations = ({ initial, filtered, error }) => {
     const title = "locations";
     return (
         <>
@@ -17,36 +18,45 @@ const Locations = ({ initial, filtered }) => {
                 <SearchBar
                     title={title}
                 />
+                {
+                    error ?
+                        <div className="mx-auto"><NoData /></div>
+                        : ''
+                }
             </div>
             <br />
             <div className="row pl-2 pr-2">
                 {
-                    filtered.length < 1
-                        ?
-                        initial.map(e => (
-                            <InfoCard
-                                title={title}
-                                key={e.id}
-                                data={e}
-                            />
+                    error === false ?
+                        filtered.length < 1
+                            ?
+                            initial.map(e => (
+                                <InfoCard
+                                    title={title}
+                                    key={e.id}
+                                    data={e}
+                                />
 
-                        ))
-                        :
-                        filtered.map(e => (
-                            <InfoCard
-                                title={title}
-                                key={e.id}
-                                data={e}
-                            />
+                            ))
+                            :
+                            filtered.map(e => (
+                                <InfoCard
+                                    title={title}
+                                    key={e.id}
+                                    data={e}
+                                />
 
-                        ))
+                            ))
+                        : ''
                 }
             </div>
             {
-                filtered < 1 ?
-                    <Pagination
-                        title={title}
-                    />
+                error === false ?
+                    filtered < 1 ?
+                        <Pagination
+                            title={title}
+                        />
+                        : ''
                     : ''
             }
         </>
@@ -55,13 +65,15 @@ const Locations = ({ initial, filtered }) => {
 function mapState(state) {
     return {
         initial: state.locations.array,
-        filtered: state.locations.filtered
+        filtered: state.locations.filtered,
+        error: state.locations.errorLoc
     }
 }
 
 Locations.propTypes = {
     initial: PropTypes.array.isRequired,
-    filtered: PropTypes.array
+    filtered: PropTypes.array,
+    error: PropTypes.bool
 }
 
 export default connect(mapState)(Locations);
