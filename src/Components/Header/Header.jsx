@@ -11,7 +11,7 @@ const Header = () => {
             <div className="mx-auto">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <NavLink className="nav-link" exact to="/" activeClassName="activo"> Characters </NavLink>
+                        <NavLink className="nav-link" exact to="/rick-morty" activeClassName="activo"> Characters </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" exact to="/locations" activeClassName="activo"> Locations </NavLink>
