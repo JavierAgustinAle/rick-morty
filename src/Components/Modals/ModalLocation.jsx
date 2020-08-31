@@ -29,23 +29,28 @@ const ModalLocation = ({ data, onHide, show }) => {
                         <li><p className="card-text">{`Type: ${data.type}`}</p></li>
                     </ul>
                     <h5 className="text-center">Residents</h5>
-                    <div className="card-deck">
-                        {data.residents.map(e => (
-                            <div className="card" key={e.name}>
-                                <img className="card-img-top" src={e.image} alt={e.name} />
-                                <div className="card-body text-dark">
-                                    <h5 className="card-title text-center">{e.name}</h5>
-                                </div>
+                    {
+                        data.residents[0].id != null ?
+                            <div className="card-deck">
+                                {
+                                    data.residents.map(e => (
+                                        <div className="card" key={e.name} style={{ maxWidth: '14rem' }}>
+                                            <img className="card-img-top" src={e.image} alt={e.name} />
+                                            <div className="card-body text-dark">
+                                                <h5 className="card-title text-center">{e.name}</h5>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
                             </div>
+                            : <h6 className="text-center pt-2">No residents in this location.</h6>
+                    }
 
-
-                        ))}
-                    </div>
                 </div>
             </div>
 
 
-        </Modal>
+        </Modal >
     )
 }
 
