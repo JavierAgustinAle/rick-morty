@@ -19,7 +19,9 @@ Aplicacion de Rick & Morty. :rocket:
 ---
 > Card de un personaje.
 ![Card](https://user-images.githubusercontent.com/39749087/91740275-77223980-eb89-11ea-8bb4-7ab0b3285a60.png)
-
+---
+> Modal con mas info de un personaje.
+![ModalChar](https://user-images.githubusercontent.com/39749087/91740472-b6508a80-eb89-11ea-9e8d-3b2401fd73bf.png)
 ---
 #### Proyecto realizado utilizando [Create React App](https://github.com/facebook/create-react-app).
 
