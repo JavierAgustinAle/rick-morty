@@ -12,7 +12,7 @@ const AppRoutes = () => {
         <Router>
             <Header />
             <Switch>
-                <Route path="/" exact component={Characters} />
+                <Route path="/rick-morty" exact component={Characters} />
 
                 {/* <Route path="/houses/:id" exact component={Houses} /> */}
                 <Route path="/locations" exact component={Locations} />
