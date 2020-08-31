@@ -16,9 +16,11 @@ Aplicacion de Rick & Morty. :rocket:
 > Pagina de inicio.
 ![Inicio](https://user-images.githubusercontent.com/39749087/91740082-2ca0bd00-eb89-11ea-8551-a00b05345729.png)
 
+---
 > Card de un personaje.
 ![Card](https://user-images.githubusercontent.com/39749087/91740275-77223980-eb89-11ea-8bb4-7ab0b3285a60.png)
 
+---
 #### Proyecto realizado utilizando [Create React App](https://github.com/facebook/create-react-app).
 
 yarn packages | Installation
