@@ -13,9 +13,11 @@ const Footer = () => {
     today = dd + '/' + mm + '/' + yyyy;
 
     return (
-        <div className="navbar navbar-dark bg-dark">
-            <p className="text-left text-white">JAVIER ALE</p>
-            <p className="text-right text-white">{`Date: ${today}`}</p>
+        <div className="pt-5">
+            <div className="navbar navbar-dark fixed-bottom bg-dark">
+                <p className="text-left text-white">JAVIER ALE</p>
+                <p className="text-right text-white">{`Date: ${today}`}</p>
+            </div>
         </div>
     )
 }

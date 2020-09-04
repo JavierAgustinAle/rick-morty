@@ -53,9 +53,12 @@ const Episodes = ({ initial, filtered, error }) => {
             {
                 error === false ?
                     filtered < 1 ?
-                        <Pagination
-                            title={title}
-                        />
+                        <div className="pb-2">
+                            <Pagination
+                                title={title}
+                            />
+                        </div>
+
                         : ''
                     : ''
             }
