@@ -52,10 +52,10 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
                         <button className="page-link" onClick={goToPrevPage}
                         >Previous</button>
                     </li>
-                    <li className="page-item" >
-                        <button className="page-link">
-                            {episodNext != null ? episodNext - 1 : episodTotal}
-                        </button>
+                    <li className="page-item disabled" >
+                        <label className="page-link text-info">
+                            {`${episodNext != null ? episodNext - 1 : episodTotal} of ${episodTotal}`}
+                        </label>
                     </li>
                     <li className={`page-item ${episodNext === null ? "disabled" : ""}`}>
                         <button className="page-link" onClick={goToNextPage}>Next</button>
@@ -71,10 +71,10 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
                     <li className={`page-item ${charsPrev === null ? "disabled" : ""}`}>
                         <button className="page-link" onClick={goToPrevPage}>Previous</button>
                     </li>
-                    <li className="page-item">
-                        <button className="page-link">
-                            {charsNext != null ? charsNext - 1 : charsTotal}
-                        </button>
+                    <li className="page-item disabled">
+                        <label className="page-link text-info">
+                            {`${charsNext != null ? charsNext - 1 : charsTotal} of ${charsTotal}`}
+                        </label>
                     </li>
                     <li className={`page-item ${charsNext === null ? "disabled" : ""}`}>
                         <button className="page-link"
@@ -92,10 +92,10 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
                     <li className={`page-item ${locationPrev === null ? "disabled" : ""}`}>
                         <button onClick={goToPrevPage} className="page-link">Previous</button>
                     </li>
-                    <li className="page-item" >
-                        <button className="page-link">
-                            {locationNext != null ? locationNext - 1 : locationTotal}
-                        </button>
+                    <li className="page-item disabled" >
+                        <label className="page-link text-info">
+                            {`${locationNext != null ? locationNext - 1 : locationTotal} of ${locationTotal}`}
+                        </label>
                     </li>
                     <li className={`page-item ${locationNext === null ? "disabled" : ""}`}>
                         <button className="page-link"
