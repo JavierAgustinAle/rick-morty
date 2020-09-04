@@ -26,7 +26,7 @@ const InfoCard = ({ data, title }) => {
                             <p>Episode: {data.episode}</p>
                         </div>
                         <div className="card-footer text-right">
-                            <button className="btn btn-sm btn-info" onClick={handleShow}><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button className="btn btn-sm btn-info" onClick={handleShow}><i className="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@ const InfoCard = ({ data, title }) => {
                             }
                         </div>
                         <div className="card-footer text-right">
-                            <button className="btn btn-sm btn-info" onClick={handleShow}><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button className="btn btn-sm btn-info" onClick={handleShow}><i className="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
