@@ -16,10 +16,13 @@ let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
 let UPDATE_PAGE_LOCATIONS = 'UPDATE_PAGE_LOCATIONS';
 
+let SET_SEARCH_LOC = 'SET_SEARCH_LOC';
+
 let initialData = {
     fetching: false,
     array: [],
     filtered: [],
+    searchLoc: '',
     nextPageLoca: 1,
     prevPageLoca: 0,
     totalPagesLoca: 0,
@@ -43,12 +46,14 @@ export default function reducer(state = initialData, action) {
         case GET_LOCATIONS_FILTERS_SUCCESS:
             return { ...state, filtered: action.payload, fetching: false, errorLoc: false }
         case REMOVE_FILTERED:
-            return { ...state, filtered: action.payload, errorLoc: false }
+            return { ...state, filtered: action.payload, errorLoc: false, searchLoc: '' }
         case UPDATE_PAGE_LOCATIONS:
             return {
                 ...state, nextPageLoca: action.payload.nextLoc,
                 prevPageLoca: action.payload.prevLoc, totalPagesLoca: action.payload.totalLoc
             }
+        case SET_SEARCH_LOC:
+            return { ...state, searchLoc: action.payload }
         default:
             return state
     }
@@ -92,6 +97,11 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
             type: GET_LOCATIONS_FILTERS_SUCCESS,
             payload: data.locations.results
 
+        })
+        let searchValue = searchName ? searchName : searchType;
+        dispatch({
+            type: SET_SEARCH_LOC,
+            payload: searchValue
         })
     }).catch((errors) => {
         dispatch({

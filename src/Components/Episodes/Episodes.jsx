@@ -9,7 +9,7 @@ import NoData from '../NoData/NoData';
 // Redux
 import { connect } from 'react-redux';
 
-const Episodes = ({ initial, filtered, error }) => {
+const Episodes = ({ initial, filtered, error, search }) => {
     const title = "episodes"
     return (
         <>
@@ -21,6 +21,12 @@ const Episodes = ({ initial, filtered, error }) => {
                 {
                     error ?
                         <div className="mx-auto"><NoData /></div>
+                        : ''
+                }
+                {
+                    search ?
+                        error ? ''
+                            : <span><small>{`Showing info for ${search}`}</small></span>
                         : ''
                 }
             </div>
@@ -70,14 +76,16 @@ function mapState(state) {
     return {
         initial: state.episodes.array,
         filtered: state.episodes.filtered,
-        error: state.episodes.errorEpiso
+        error: state.episodes.errorEpiso,
+        search: state.episodes.searchEpi
     }
 }
 
 Episodes.propTypes = {
     initial: PropTypes.array.isRequired,
     filtered: PropTypes.array,
-    error: PropTypes.bool
+    error: PropTypes.bool,
+    search: PropTypes.string
 }
 
 export default connect(mapState)(Episodes);

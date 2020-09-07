@@ -9,7 +9,7 @@ import NoData from '../NoData/NoData';
 import { connect } from 'react-redux';
 
 
-const Characters = ({ initial, filtered, error }) => {
+const Characters = ({ initial, filtered, error, search }) => {
 
     const title = 'characters';
     return (
@@ -24,8 +24,13 @@ const Characters = ({ initial, filtered, error }) => {
                         <div className="mx-auto"><NoData /></div>
                         : ''
                 }
+                {
+                    search ?
+                        error ? ''
+                            : <span><small>{`Showing info for ${search}`}</small></span>
+                        : ''
+                }
             </div>
-
             <br />
             <div className="row pl-2 pr-2">
                 {
@@ -70,14 +75,16 @@ function mapState(state) {
     return {
         initial: state.characters.array,
         filtered: state.characters.filtered,
-        error: state.characters.error
+        error: state.characters.error,
+        search: state.characters.search
     }
 }
 
 Characters.propTypes = {
     initial: PropTypes.array.isRequired,
     filtered: PropTypes.array,
-    error: PropTypes.bool
+    error: PropTypes.bool,
+    search: PropTypes.string
 }
 
 export default connect(mapState)(Characters);

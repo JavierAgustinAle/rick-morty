@@ -23,7 +23,7 @@ const Header = () => {
                 document.getElementById('r-m').className = "nav-link"
                 break;
             default:
-                document.getElementById('r-m').className = "nav-link active"
+                document.getElementById('r-m').className = "nav-link"
                 document.getElementById('loc').className = "nav-link"
                 document.getElementById('ep').className = "nav-link"
                 break;

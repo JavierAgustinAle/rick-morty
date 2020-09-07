@@ -16,10 +16,13 @@ let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
 let UPDATE_PAGE_EPISODE = 'UPDATE_PAGE_EPISODE';
 
+let SET_SEARCH_EP = 'SET_SEARCH_EP';
+
 let initialData = {
     fetching: false,
     array: [],
     filtered: [],
+    searchEpi: '',
     nextPageEpisod: 1,
     prevPageEpisod: 0,
     totalPagesEpisod: 0,
@@ -44,12 +47,14 @@ export default function reducer(state = initialData, action) {
         case GET_FILTERS_EPISODES_SUCCESS:
             return { ...state, filtered: action.payload, fetching: false, errorEpiso: false }
         case REMOVE_FILTERED:
-            return { ...state, filtered: action.payload, errorEpiso: false }
+            return { ...state, filtered: action.payload, errorEpiso: false, searchEpi: '' }
         case UPDATE_PAGE_EPISODE:
             return {
                 ...state, nextPageEpisod: action.payload.next,
                 prevPageEpisod: action.payload.prev, totalPagesEpisod: action.payload.total
             }
+        case SET_SEARCH_EP:
+            return { ...state, searchEpi: action.payload }
         default:
             return state
     }
@@ -92,6 +97,10 @@ export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
             type: GET_FILTERS_EPISODES_SUCCESS,
             payload: data.episodes.results
 
+        })
+        dispatch({
+            type: SET_SEARCH_EP,
+            payload: searchName
         })
     }).catch((errors) => {
         dispatch({

@@ -17,10 +17,13 @@ let REMOVE_FILTERED = 'REMOVE_FILTERED';
 
 let UPDATE_PAGE = 'UPDATE_PAGE';
 
+let SET_SEARCH = 'SET_SEARCH';
+
 let initialData = {
     fetching: false,
     array: [],
     filtered: [],
+    search: '',
     nextPage: 1,
     prevPage: 0,
     totalPages: 0,
@@ -45,7 +48,9 @@ export default function reducer(state = initialData, action) {
         case GET_FILTERS_SUCCESS:
             return { ...state, filtered: action.payload, fetching: false, error: false }
         case REMOVE_FILTERED:
-            return { ...state, filtered: action.payload, error: false }
+            return { ...state, filtered: action.payload, error: false, search: '' }
+        case SET_SEARCH:
+            return { ...state, search: action.payload }
         case UPDATE_PAGE:
             return {
                 ...state, nextPage: action.payload.next,
@@ -82,6 +87,11 @@ export let getCharFiltersAction = (searchName, searchType) => (dispatch, getStat
         query,
         variables: { name: searchName, type: searchType }
     }).then(({ data }) => {
+        let searchValue = searchName ? searchName : searchType;
+        dispatch({
+            type: SET_SEARCH,
+            payload: searchValue
+        })
         dispatch({
             type: GET_FILTERS_SUCCESS,
             payload: data.characters.results
