@@ -15,7 +15,7 @@ const CharCard = ({ data }) => {
     }
     return (
         <>
-            <div className="mt-2 mb-2 col-lg-3 col-md-4 col-sm-6">
+            <div className="mt-2 mb-2 col-lg-4 col-md-5 col-sm-6 mx-auto">
                 <div className="card text-white bg-secondary h-100 mx-auto" style={{ width: '18rem' }}>
                     <div className="embed-responsive embed-responsive-1by1">
                         <button onClick={handleShow}>
