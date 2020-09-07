@@ -32,7 +32,7 @@ const Characters = ({ initial, filtered, error, search }) => {
                 }
             </div>
             <br />
-            <div className="row pl-2 pr-2">
+            <div className="row pl-2 pr-2 pb-3">
                 {
                     error === false ?
                         filtered.length < 1
