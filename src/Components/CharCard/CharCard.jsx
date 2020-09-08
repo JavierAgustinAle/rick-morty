@@ -35,7 +35,7 @@ const CharCard = ({ data }) => {
                         show={show}
                         onHide={handleClose}
                         data={data} />
-                    : ''
+                    : null
             }
         </>
     )

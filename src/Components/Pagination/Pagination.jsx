@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 // Redux
 import { connect } from 'react-redux';
 import { getCharactersAction } from '../../Redux/charsDuck';
@@ -64,7 +63,8 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
             </nav>
         )
 
-    } else if (title === 'characters') {
+    }
+    if (title === 'characters') {
         return (
             <nav className="pt-3">
                 <ul className="pagination justify-content-center">
@@ -84,8 +84,8 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
                 </ul>
             </nav>
         )
-    } else if (title === 'locations') {
-
+    }
+    if (title === 'locations') {
         return (
             <nav className="pt-3">
                 <ul className="pagination justify-content-center">

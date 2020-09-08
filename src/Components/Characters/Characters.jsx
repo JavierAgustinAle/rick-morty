@@ -22,13 +22,13 @@ const Characters = ({ initial, filtered, error, search }) => {
                 {
                     error ?
                         <div className="mx-auto"><NoData /></div>
-                        : ''
+                        : null
                 }
                 {
                     search ?
-                        error ? ''
+                        error ? null
                             : <span><small>{`Showing info for ${search}`}</small></span>
-                        : ''
+                        : null
                 }
             </div>
             <br />
@@ -63,14 +63,14 @@ const Characters = ({ initial, filtered, error, search }) => {
                                 title={title}
                             />
                         </div>
-                        : ''
-                    : ''
+                        : null
+                    : null
             }
         </>
     )
 }
 
-// Entrega todo lo que tenga el store
+
 function mapState(state) {
     return {
         initial: state.characters.array,

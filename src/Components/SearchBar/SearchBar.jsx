@@ -99,7 +99,7 @@ const SearchBar = ({ title,
 
 }
 
-// Entrega todo lo que tenga el store
+
 function mapState(state) {
     return {}
 }

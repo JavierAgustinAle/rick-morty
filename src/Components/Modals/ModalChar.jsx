@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Modal.css';
-
 // Modal
 import Modal from 'react-modal';
 
@@ -21,7 +20,7 @@ const ModalChar = ({ data, onHide, show }) => {
             }}>
             <div className="card mb-3 text-white bg-secondary">
                 <div className="text-right pb-1">
-                    <button className="btn btn-sm btn-danger" onClick={onHide}><i class="fa fa-times"></i></button>
+                    <button className="btn btn-sm btn-danger" onClick={onHide}><i className="fa fa-times"></i></button>
                 </div>
                 <img className="card-img-top rounded mx-auto w-25" src={data.image} alt={data.name} />
                 <div className="card-body">

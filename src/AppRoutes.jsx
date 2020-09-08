@@ -15,17 +15,13 @@ const AppRoutes = () => {
             <Switch>
                 <Route path="/rick-morty" exact component={Characters} />
 
-                {/* <Route path="/houses/:id" exact component={Houses} /> */}
                 <Route path="/locations" exact component={Locations} />
 
                 <Route path="/episodes" exact component={Episodes} />
 
-                {/* <Route component={NotFound} /> */}
-
                 <Route>
-                    <div>
-                        <h1>Error 404</h1>
-                        <span className="text-danger">Pagina no encontrada.</span>
+                    <div className="alert alert-danger pt-2" role="alert">
+                        <h4 className="alert-heading text-center">Page not found</h4>
                     </div>
                 </Route>
             </Switch>

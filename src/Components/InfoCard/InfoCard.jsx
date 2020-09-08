@@ -36,12 +36,13 @@ const InfoCard = ({ data, title }) => {
                             show={show}
                             onHide={handleClose}
                             data={data} />
-                        : ''
+                        : null
                 }
             </>
         )
+    }
 
-    } else {
+    if (title === 'locations') {
         return (
             <>
                 < div className="mt-2 mb-2 col-lg-4 col-md-5 col-sm-6 mx-auto" >
@@ -65,7 +66,7 @@ const InfoCard = ({ data, title }) => {
                             show={show}
                             onHide={handleClose}
                             data={data} />
-                        : ''
+                        : null
                 }
             </>
         )

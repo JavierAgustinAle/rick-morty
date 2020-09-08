@@ -21,13 +21,13 @@ const Episodes = ({ initial, filtered, error, search }) => {
                 {
                     error ?
                         <div className="mx-auto"><NoData /></div>
-                        : ''
+                        : null
                 }
                 {
                     search ?
-                        error ? ''
+                        error ? null
                             : <span><small>{`Showing info for ${search}`}</small></span>
-                        : ''
+                        : null
                 }
             </div>
             <br />
@@ -53,7 +53,7 @@ const Episodes = ({ initial, filtered, error, search }) => {
                                 />
 
                             ))
-                        : ''
+                        : null
                 }
             </div>
             {
@@ -65,8 +65,8 @@ const Episodes = ({ initial, filtered, error, search }) => {
                             />
                         </div>
 
-                        : ''
-                    : ''
+                        : null
+                    : null
             }
         </>
     )

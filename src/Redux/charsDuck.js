@@ -1,23 +1,20 @@
-import ApolloClient, { gql } from "apollo-boost"
+import { gql } from "apollo-boost"
+import { client } from './Client';
 
 
-let client = new ApolloClient({
-    uri: "https://rickandmortyapi.com/graphql"
-})
+const GET_CHARACTERS = 'GET_CHARACTERS';
+const GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
+const GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
 
-let GET_CHARACTERS = 'GET_CHARACTERS';
-let GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
-let GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
+const GET_FILTERS = 'GET_FILTERS';
+const GET_FILTERS_ERROR = 'GET_FILTERS_ERROR';
+const GET_FILTERS_SUCCESS = 'GET_FILTERS_SUCCESS';
 
-let GET_FILTERS = 'GET_FILTERS';
-let GET_FILTERS_ERROR = 'GET_FILTERS_ERROR';
-let GET_FILTERS_SUCCESS = 'GET_FILTERS_SUCCESS';
+const REMOVE_FILTERED = 'REMOVE_FILTERED';
 
-let REMOVE_FILTERED = 'REMOVE_FILTERED';
+const UPDATE_PAGE = 'UPDATE_PAGE';
 
-let UPDATE_PAGE = 'UPDATE_PAGE';
-
-let SET_SEARCH = 'SET_SEARCH';
+const SET_SEARCH = 'SET_SEARCH';
 
 let initialData = {
     fetching: false,
@@ -63,8 +60,8 @@ export default function reducer(state = initialData, action) {
 
 //Actions Creators
 
-export let getCharFiltersAction = (searchName, searchType) => (dispatch, getState) => {
-    let query = gql`
+export const getCharFiltersAction = (searchName, searchType) => (dispatch, getState) => {
+    const query = gql`
     query ($name: String, $type: String) {
         characters( filter: { name: $name, type: $type }) {
           results {
@@ -87,7 +84,7 @@ export let getCharFiltersAction = (searchName, searchType) => (dispatch, getStat
         query,
         variables: { name: searchName, type: searchType }
     }).then(({ data }) => {
-        let searchValue = searchName ? searchName : searchType;
+        const searchValue = searchName ? searchName : searchType;
         dispatch({
             type: SET_SEARCH,
             payload: searchValue
@@ -107,8 +104,8 @@ export let getCharFiltersAction = (searchName, searchType) => (dispatch, getStat
 
 }
 
-export let removeSearchCharAction = () => (dispatch, getState) => {
-    let filtered = []
+export const removeSearchCharAction = () => (dispatch, getState) => {
+    const filtered = []
 
     dispatch({
         type: REMOVE_FILTERED,
@@ -119,8 +116,8 @@ export let removeSearchCharAction = () => (dispatch, getState) => {
 }
 
 
-export let getCharactersAction = (direction) => (dispatch, getState) => {
-    let query = gql`
+export const getCharactersAction = (direction) => (dispatch, getState) => {
+    const query = gql`
     query ($page: Int){
         characters(page: $page){
           info{

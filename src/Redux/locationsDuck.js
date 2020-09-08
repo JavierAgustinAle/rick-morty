@@ -1,22 +1,19 @@
-import ApolloClient, { gql } from "apollo-boost";
+import { gql } from "apollo-boost";
+import { client } from './Client';
 
-let client = new ApolloClient({
-    uri: "https://rickandmortyapi.com/graphql"
-})
+const GET_LOCATIONS = 'GET_LOCATIONS';
+const GET_LOCATIONS_SUCCESS = 'GET_LOCATIONS_SUCCESS';
+const GET_LOCATIONS_ERROR = 'GET_LOCATIONS_ERROR';
 
-let GET_LOCATIONS = 'GET_LOCATIONS';
-let GET_LOCATIONS_SUCCESS = 'GET_LOCATIONS_SUCCESS';
-let GET_LOCATIONS_ERROR = 'GET_LOCATIONS_ERROR';
+const GET_LOCATIONS_FILTERS = 'GET_LOCATIONS_FILTERS';
+const GET_LOCATIONS_FILTERS_ERROR = 'GET_LOCATIONS_FILTERS_ERROR';
+const GET_LOCATIONS_FILTERS_SUCCESS = 'GET_LOCATIONS_FILTERS_SUCCESS';
 
-let GET_LOCATIONS_FILTERS = 'GET_LOCATIONS_FILTERS';
-let GET_LOCATIONS_FILTERS_ERROR = 'GET_LOCATIONS_FILTERS_ERROR';
-let GET_LOCATIONS_FILTERS_SUCCESS = 'GET_LOCATIONS_FILTERS_SUCCESS';
+const REMOVE_FILTERED = 'REMOVE_FILTERED';
 
-let REMOVE_FILTERED = 'REMOVE_FILTERED';
+const UPDATE_PAGE_LOCATIONS = 'UPDATE_PAGE_LOCATIONS';
 
-let UPDATE_PAGE_LOCATIONS = 'UPDATE_PAGE_LOCATIONS';
-
-let SET_SEARCH_LOC = 'SET_SEARCH_LOC';
+const SET_SEARCH_LOC = 'SET_SEARCH_LOC';
 
 let initialData = {
     fetching: false,
@@ -61,8 +58,8 @@ export default function reducer(state = initialData, action) {
 
 
 //Actions Creators
-export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, getState) => {
-    let query = gql`
+export const getLocationsFiltersAction = (searchName, searchType) => (dispatch, getState) => {
+    const query = gql`
     query ($name: String, $type: String) {
         locations( filter: { name: $name, type: $type }) {
             results{
@@ -98,7 +95,7 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
             payload: data.locations.results
 
         })
-        let searchValue = searchName ? searchName : searchType;
+        const searchValue = searchName ? searchName : searchType;
         dispatch({
             type: SET_SEARCH_LOC,
             payload: searchValue
@@ -112,8 +109,8 @@ export let getLocationsFiltersAction = (searchName, searchType) => (dispatch, ge
     })
 }
 
-export let removeSearchLocationsAction = () => (dispatch, getState) => {
-    let filtered = [];
+export const removeSearchLocationsAction = () => (dispatch, getState) => {
+    const filtered = [];
 
     dispatch({
         type: REMOVE_FILTERED,
@@ -121,8 +118,8 @@ export let removeSearchLocationsAction = () => (dispatch, getState) => {
     })
 }
 
-export let getLocationsAction = (direction) => (dispatch, getState) => {
-    let query = gql`
+export const getLocationsAction = (direction) => (dispatch, getState) => {
+    const query = gql`
         query ($page: Int){
             locations(page: $page){
             info{

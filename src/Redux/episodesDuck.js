@@ -1,22 +1,19 @@
-import ApolloClient, { gql } from "apollo-boost";
+import { gql } from "apollo-boost";
+import { client } from './Client';
 
-let client = new ApolloClient({
-    uri: "https://rickandmortyapi.com/graphql"
-})
+const GET_EPISODES = 'GET_EPISODES';
+const GET_EPISODES_SUCCESS = 'GET_EPISODES_SUCCESS';
+const GET_EPISODES_ERROR = 'GET_EPISODES_ERROR';
 
-let GET_EPISODES = 'GET_EPISODES';
-let GET_EPISODES_SUCCESS = 'GET_EPISODES_SUCCESS';
-let GET_EPISODES_ERROR = 'GET_EPISODES_ERROR';
+const GET_FILTERS_EPISODES = 'GET_FILTERS_EPISODES';
+const GET_FILTERS_EPISODES_ERROR = 'GET_FILTERS_EPISODES_ERROR';
+const GET_FILTERS_EPISODES_SUCCESS = 'GET_FILTERS_EPISODES_SUCCESS';
 
-let GET_FILTERS_EPISODES = 'GET_FILTERS_EPISODES';
-let GET_FILTERS_EPISODES_ERROR = 'GET_FILTERS_EPISODES_ERROR';
-let GET_FILTERS_EPISODES_SUCCESS = 'GET_FILTERS_EPISODES_SUCCESS';
+const REMOVE_FILTERED = 'REMOVE_FILTERED';
 
-let REMOVE_FILTERED = 'REMOVE_FILTERED';
+const UPDATE_PAGE_EPISODE = 'UPDATE_PAGE_EPISODE';
 
-let UPDATE_PAGE_EPISODE = 'UPDATE_PAGE_EPISODE';
-
-let SET_SEARCH_EP = 'SET_SEARCH_EP';
+const SET_SEARCH_EP = 'SET_SEARCH_EP';
 
 let initialData = {
     fetching: false,
@@ -62,8 +59,8 @@ export default function reducer(state = initialData, action) {
 
 //Actions Creators
 
-export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
-    let query = gql`
+export const getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
+    const query = gql`
     query ($name: String) {
         episodes( filter: { name: $name }) {
             results{
@@ -113,8 +110,8 @@ export let getEpisodesFiltersAction = (searchName) => (dispatch, getState) => {
 
 }
 
-export let removeSearchEpisodeAction = () => (dispatch, getState) => {
-    let filtered = [];
+export const removeSearchEpisodeAction = () => (dispatch, getState) => {
+    const filtered = [];
 
     dispatch({
         type: REMOVE_FILTERED,
@@ -122,8 +119,8 @@ export let removeSearchEpisodeAction = () => (dispatch, getState) => {
     })
 }
 
-export let getEpisodesAction = (direction) => (dispatch, getState) => {
-    let query = gql`
+export const getEpisodesAction = (direction) => (dispatch, getState) => {
+    const query = gql`
     query ($page: Int){
         episodes(page: $page){
           info{
@@ -159,7 +156,6 @@ export let getEpisodesAction = (direction) => (dispatch, getState) => {
 
     return client.query({
         query,
-
         variables: { page: pageToGo }
     }).then(({ data }) => {
         for (let i = 0; i < data.episodes.results.length; i++) {
