@@ -31,12 +31,11 @@ const InfoCard = ({ data, title }) => {
                     </div>
                 </div>
                 {
-                    show ?
-                        <ModalEpisode
-                            show={show}
-                            onHide={handleClose}
-                            data={data} />
-                        : null
+                    show && <ModalEpisode
+                        show={show}
+                        onHide={handleClose}
+                        data={data} />
+
                 }
             </>
         )
@@ -61,12 +60,11 @@ const InfoCard = ({ data, title }) => {
                     </div>
                 </div>
                 {
-                    show ?
-                        <ModalLocation
-                            show={show}
-                            onHide={handleClose}
-                            data={data} />
-                        : null
+                    show && <ModalLocation
+                        show={show}
+                        onHide={handleClose}
+                        data={data} />
+
                 }
             </>
         )

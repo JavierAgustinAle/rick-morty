@@ -24,9 +24,8 @@ const Locations = ({ initial, filtered, error, search }) => {
                         : null
                 }
                 {
-                    search ?
-                        error ? null
-                            : <span><small>{`Showing info for ${search}`}</small></span>
+                    search && !error ?
+                        <span><small>{`Showing info for ${search}`}</small></span>
                         : null
                 }
             </div>
@@ -57,14 +56,12 @@ const Locations = ({ initial, filtered, error, search }) => {
                 }
             </div>
             {
-                error === false ?
-                    filtered < 1 ?
-                        <div className="pb-2">
-                            <Pagination
-                                title={title}
-                            />
-                        </div>
-                        : null
+                error === false && filtered < 1 ?
+                    <div className="pb-2">
+                        <Pagination
+                            title={title}
+                        />
+                    </div>
                     : null
             }
         </>

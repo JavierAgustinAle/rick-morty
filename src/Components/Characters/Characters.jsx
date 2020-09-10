@@ -25,17 +25,16 @@ const Characters = ({ initial, filtered, error, search }) => {
                         : null
                 }
                 {
-                    search ?
-                        error ? null
-                            : <span><small>{`Showing info for ${search}`}</small></span>
+                    search && !error ?
+                        <span><small>{`Showing info for ${search}`}</small></span>
                         : null
                 }
             </div>
             <br />
             <div className="row pl-2 pr-2 pb-3">
                 {
-                    error === false ?
-                        filtered.length < 1
+                    error === false
+                        ? filtered.length < 1
                             ?
                             initial.map(e => (
                                 <CharCard
@@ -52,19 +51,18 @@ const Characters = ({ initial, filtered, error, search }) => {
                                 />
 
                             ))
-                        : ''
+                        : null
                 }
             </div>
             {
-                error === false ?
-                    filtered < 1 ?
-                        <div className="pb-2">
-                            <Pagination
-                                title={title}
-                            />
-                        </div>
-                        : null
+                error === false && filtered < 1 ?
+                    <div className="pb-2">
+                        <Pagination
+                            title={title}
+                        />
+                    </div>
                     : null
+
             }
         </>
     )

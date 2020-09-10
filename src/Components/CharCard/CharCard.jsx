@@ -30,12 +30,11 @@ const CharCard = ({ data }) => {
                 </div>
             </div>
             {
-                show ?
-                    <CharModal
-                        show={show}
-                        onHide={handleClose}
-                        data={data} />
-                    : null
+                show && <CharModal
+                    show={show}
+                    onHide={handleClose}
+                    data={data} />
+
             }
         </>
     )
