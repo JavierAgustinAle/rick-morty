@@ -10,7 +10,7 @@ Aplicacion de Rick & Morty. :rocket:
 3. Ver las diferentes locaciones que aparecen en la serie.
 
 
-## Aplicacion hecha por [Javier Ale](www.linkedin.com/in/javieragustinale) :computer:
+## Aplicacion hecha por [Javier Ale](https://www.linkedin.com/in/javieragustinale/) :computer:
 
 
 ### Screenshots
