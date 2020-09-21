@@ -9,7 +9,7 @@ import NoData from '../NoData/NoData';
 // Redux
 import { connect } from 'react-redux';
 
-const Locations = ({ initial, filtered, error, search }) => {
+const Locations = ({ initial, filtered, error, search }): JSX.Element => {
     const title: string = "locations";
     return (
         <>

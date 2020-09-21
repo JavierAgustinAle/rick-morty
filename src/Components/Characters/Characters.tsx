@@ -9,7 +9,7 @@ import NoData from '../NoData/NoData';
 import { connect } from 'react-redux';
 
 
-const Characters = ({ initial, filtered, error, search }) => {
+const Characters = ({ initial, filtered, error, search }): JSX.Element => {
 
     const title: string = 'characters';
     return (
@@ -69,7 +69,7 @@ const Characters = ({ initial, filtered, error, search }) => {
 }
 
 
-function mapState(state) {
+function mapState(state: any) {
     return {
         initial: state.characters.array,
         filtered: state.characters.filtered,

@@ -111,7 +111,7 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
 
 }
 
-function mapState(state) {
+function mapState(state: any) {
     return {
         charsTotal: state.characters.totalPages,
         episodTotal: state.episodes.totalPagesEpisod,

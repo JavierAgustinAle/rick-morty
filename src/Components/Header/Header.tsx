@@ -2,9 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import { NavLink } from 'react-router-dom';
 
-const Header = () => {
+const Header = (): JSX.Element => {
 
-    const changeActive = (id) => {
+    const changeActive = (id: string): void => {
         switch (id) {
             case 'r-m':
                 document.getElementById('r-m').className = "nav-link active"

@@ -4,8 +4,8 @@ import './Modal.css';
 // Modal
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root')
-const ModalChar = ({ data, onHide, show }) => {
+Modal.setAppElement('#root');
+const ModalChar = ({ data, onHide, show }): JSX.Element => {
     return (
         <Modal isOpen={show}
             style={{

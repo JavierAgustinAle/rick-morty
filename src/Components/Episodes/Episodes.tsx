@@ -9,7 +9,8 @@ import NoData from '../NoData/NoData';
 // Redux
 import { connect } from 'react-redux';
 
-const Episodes = ({ initial, filtered, error, search }) => {
+const Episodes = ({ initial, filtered, error, search }): JSX.Element => {
+
     const title: string = "episodes"
     return (
         <>
@@ -70,7 +71,7 @@ const Episodes = ({ initial, filtered, error, search }) => {
     )
 }
 
-function mapState(state) {
+function mapState(state: any) {
     return {
         initial: state.episodes.array,
         filtered: state.episodes.filteredEpi,

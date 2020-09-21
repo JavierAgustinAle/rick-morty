@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root')
 
-const ModalLocation = ({ data, onHide, show }) => {
+const ModalLocation = ({ data, onHide, show }): JSX.Element => {
     return (
         <Modal isOpen={show}
             style={{

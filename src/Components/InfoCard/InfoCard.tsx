@@ -6,12 +6,12 @@ import ModalLocation from '../Modals/ModalLocation';
 import ModalEpisode from '../Modals/ModalEpisode';
 
 const InfoCard = ({ data, title }) => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState<boolean>(false);
 
-    function handleClose() {
+    function handleClose(): void {
         setShow(false);
     }
-    function handleShow() {
+    function handleShow(): void {
         setShow(true);
     }
 

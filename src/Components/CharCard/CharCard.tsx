@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import CharModal from '../Modals/ModalChar';
 
 
-const CharCard = ({ data }) => {
-    const [show, setShow] = useState(false);
+const CharCard = ({ data }): JSX.Element => {
+    const [show, setShow] = useState<boolean>(false);
 
-    function handleClose() {
+    function handleClose(): void {
         setShow(false);
     }
-    function handleShow() {
+    function handleShow(): void {
         setShow(true);
     }
     return (

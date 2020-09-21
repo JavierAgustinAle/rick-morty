@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root')
 
-const ModalEpisode = ({ data, onHide, show }) => {
+const ModalEpisode = ({ data, onHide, show }): JSX.Element => {
     return (
         <Modal isOpen={show}
             style={{

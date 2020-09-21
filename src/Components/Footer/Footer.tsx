@@ -1,8 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-const Footer = () => {
 
-    const date = moment().format("MMM Do YYYY");
+const Footer = (): JSX.Element => {
+
+    const date: string = moment().format("MMM Do YYYY");
 
     return (
         <div className="pt-5">

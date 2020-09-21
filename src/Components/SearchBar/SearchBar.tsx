@@ -13,14 +13,13 @@ const SearchBar = ({ title,
     removeSearchEpisodeAction, removeSearchLocationsAction }) => {
 
     function searchInfo(e) {
-
-        let target = e.target.value
+        let target: string = e.target.value;
         if (target.length > 0)
             target = target[0].toUpperCase() + target.slice(1);
 
         if (target.length > 2) {
             if (title === 'characters') {
-                let search = (document.getElementById('searchType') as HTMLFormElement).value
+                const search: string = (document.getElementById('searchType') as HTMLFormElement).value;
 
                 search === 'name' ?
                     //Filter by name
@@ -35,7 +34,7 @@ const SearchBar = ({ title,
                 getEpisodesFiltersAction(target);
             }
             if (title === 'locations') {
-                let search = (document.getElementById('searchType') as HTMLFormElement).value
+                const search: string = (document.getElementById('searchType') as HTMLFormElement).value
                 search === 'name' ?
                     //Filter by name
                     getLocationsFiltersAction(target, '')
@@ -102,7 +101,7 @@ const SearchBar = ({ title,
 }
 
 
-function mapState(state) {
+function mapState(state: any) {
     return {}
 }
 
