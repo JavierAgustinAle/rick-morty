@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
-import { getCharactersAction } from '../../Redux/charsDuck';
-import { getEpisodesAction } from '../../Redux/episodesDuck';
-import { getLocationsAction } from '../../Redux/locationsDuck';
+import { getCharactersAction } from '../../Redux/Reducers/charsReducer';
+import { getEpisodesAction } from '../../Redux/Reducers/episodesReducer';
+import { getLocationsAction } from '../../Redux/Reducers/locationsReducer';
 
 
 const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, episodNext,

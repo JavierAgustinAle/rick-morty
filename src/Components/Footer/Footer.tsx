@@ -1,22 +1,14 @@
 import React from 'react';
-
+import moment from 'moment';
 const Footer = () => {
 
-    let today = new Date();
-    let dd = today.getDate();
-
-    let mm = today.getMonth() + 1;
-    let yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-    today = dd + '/' + mm + '/' + yyyy;
+    const date = moment().format("MMM Do YYYY");
 
     return (
         <div className="pt-5">
             <div className="navbar navbar-dark fixed-bottom bg-dark">
                 <p className="text-left text-white">JAVIER ALE</p>
-                <p className="text-right text-white">{`Date: ${today}`}</p>
+                <p className="text-right text-white">{`Date: ${date}`}</p>
             </div>
         </div>
     )

@@ -1,9 +1,9 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import charsReducer, { getCharactersAction } from './charsDuck';
-import locationsReducer, { getLocationsAction } from './locationsDuck';
-import episodesReducer, { getEpisodesAction } from './episodesDuck';
+import charsReducer, { getCharactersAction } from './Reducers/charsReducer';
+import locationsReducer, { getLocationsAction } from './Reducers/locationsReducer';
+import episodesReducer, { getEpisodesAction } from './Reducers/episodesReducer';
 
 let rootReducer = combineReducers({
     characters: charsReducer,

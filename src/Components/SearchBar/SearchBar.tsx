@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Redux
 import { connect } from 'react-redux';
-import { getCharFiltersAction, removeSearchCharAction } from '../../Redux/charsDuck';
-import { getEpisodesFiltersAction, removeSearchEpisodeAction } from '../../Redux/episodesDuck';
-import { getLocationsFiltersAction, removeSearchLocationsAction } from '../../Redux/locationsDuck';
+import { getCharFiltersAction, removeSearchCharAction } from '../../Redux/Reducers/charsReducer';
+import { getEpisodesFiltersAction, removeSearchEpisodeAction } from '../../Redux/Reducers/episodesReducer';
+import { getLocationsFiltersAction, removeSearchLocationsAction } from '../../Redux/Reducers/locationsReducer';
+
 
 const SearchBar = ({ title,
     getCharFiltersAction, getEpisodesFiltersAction,
@@ -19,7 +20,8 @@ const SearchBar = ({ title,
 
         if (target.length > 2) {
             if (title === 'characters') {
-                let search = document.getElementById('searchType').value
+                let search = (document.getElementById('searchType') as HTMLFormElement).value
+
                 search === 'name' ?
                     //Filter by name
                     getCharFiltersAction(target, '')
@@ -33,7 +35,7 @@ const SearchBar = ({ title,
                 getEpisodesFiltersAction(target);
             }
             if (title === 'locations') {
-                let search = document.getElementById('searchType').value
+                let search = (document.getElementById('searchType') as HTMLFormElement).value
                 search === 'name' ?
                     //Filter by name
                     getLocationsFiltersAction(target, '')
@@ -49,15 +51,15 @@ const SearchBar = ({ title,
     function clearSearch() {
         if (title === 'characters') {
             removeSearchCharAction();
-            document.getElementById('input').value = '';
+            (document.getElementById('input') as HTMLFormElement).value = '';
         }
         if (title === 'episodes') {
             removeSearchEpisodeAction();
-            document.getElementById('input-episodes').value = '';
+            (document.getElementById('input-episodes') as HTMLFormElement).value = '';
         }
         if (title === 'locations') {
             removeSearchLocationsAction();
-            document.getElementById('input').value = '';
+            (document.getElementById('input') as HTMLFormElement).value = '';
         }
     }
 

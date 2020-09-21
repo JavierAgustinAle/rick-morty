@@ -1,20 +1,11 @@
 import { gql } from "apollo-boost"
-import { client } from './Client';
-
-
-const GET_CHARACTERS = 'GET_CHARACTERS';
-const GET_CHARACTERS_SUCCESS = 'GET_CHARACTERS_SUCCESS';
-const GET_CHARACTERS_ERROR = 'GET_CHARACTERS_ERROR';
-
-const GET_FILTERS = 'GET_FILTERS';
-const GET_FILTERS_ERROR = 'GET_FILTERS_ERROR';
-const GET_FILTERS_SUCCESS = 'GET_FILTERS_SUCCESS';
-
-const REMOVE_FILTERED = 'REMOVE_FILTERED';
-
-const UPDATE_PAGE = 'UPDATE_PAGE';
-
-const SET_SEARCH = 'SET_SEARCH';
+import { client } from '../Client';
+// Actions
+import {
+    GET_CHARACTERS, GET_CHARACTERS_SUCCESS, GET_CHARACTERS_ERROR,
+    GET_FILTERS, GET_FILTERS_ERROR, GET_FILTERS_SUCCESS, REMOVE_FILTERED,
+    UPDATE_PAGE, SET_SEARCH
+} from '../Actions/charActions';
 
 let initialData = {
     fetching: false,

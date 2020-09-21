@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
 // Components
 import SearchBar from '../SearchBar/SearchBar';
@@ -9,11 +9,11 @@ import NoData from '../NoData/NoData';
 // Redux
 import { connect } from 'react-redux';
 
-const Locations = ({ initial, filtered, error, search }) => {
-    const title = "locations";
+const Episodes = ({ initial, filtered, error, search }) => {
+    const title: string = "episodes"
     return (
         <>
-            <h1 className="pt-1 text-center">Search your favorite location</h1>
+            <h1 className="pt-1 text-center">Search your favorite episode</h1>
             <div className="mx-auto col-8 col-sm-7 pt-3 pb-3">
                 <SearchBar
                     title={title}
@@ -56,31 +56,34 @@ const Locations = ({ initial, filtered, error, search }) => {
                 }
             </div>
             {
-                error === false && filtered < 1 ?
+                error === false && filtered < 1
+                    ?
                     <div className="pb-2">
                         <Pagination
                             title={title}
                         />
                     </div>
                     : null
+
             }
         </>
     )
 }
+
 function mapState(state) {
     return {
-        initial: state.locations.array,
-        filtered: state.locations.filtered,
-        error: state.locations.errorLoc,
-        search: state.locations.searchLoc
+        initial: state.episodes.array,
+        filtered: state.episodes.filteredEpi,
+        error: state.episodes.errorEpiso,
+        search: state.episodes.searchEpi
     }
 }
 
-Locations.propTypes = {
+Episodes.propTypes = {
     initial: PropTypes.array.isRequired,
     filtered: PropTypes.array,
     error: PropTypes.bool,
     search: PropTypes.string
 }
 
-export default connect(mapState)(Locations);
+export default connect(mapState)(Episodes);

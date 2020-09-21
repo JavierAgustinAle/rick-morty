@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import AppRoutes from './AppRoutes';
 import './App.css';
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="style">
       <AppRoutes />

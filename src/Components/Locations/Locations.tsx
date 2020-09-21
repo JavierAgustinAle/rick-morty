@@ -1,20 +1,19 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types';
-// Componets
+// Components
 import SearchBar from '../SearchBar/SearchBar';
-import CharCard from '../CharCard/CharCard';
+import InfoCard from '../InfoCard/InfoCard';
 import Pagination from '../Pagination/Pagination';
 import NoData from '../NoData/NoData';
+
 // Redux
 import { connect } from 'react-redux';
 
-
-const Characters = ({ initial, filtered, error, search }) => {
-
-    const title = 'characters';
+const Locations = ({ initial, filtered, error, search }) => {
+    const title: string = "locations";
     return (
         <>
-            <h1 className="pt-1 text-center">Search your favorite character</h1>
+            <h1 className="pt-1 text-center">Search your favorite location</h1>
             <div className="mx-auto col-8 col-sm-7 pt-3 pb-3">
                 <SearchBar
                     title={title}
@@ -33,11 +32,12 @@ const Characters = ({ initial, filtered, error, search }) => {
             <br />
             <div className="row pl-2 pr-2 pb-3">
                 {
-                    error === false
-                        ? filtered.length < 1
+                    error === false ?
+                        filtered.length < 1
                             ?
                             initial.map(e => (
-                                <CharCard
+                                <InfoCard
+                                    title={title}
                                     key={e.id}
                                     data={e}
                                 />
@@ -45,7 +45,8 @@ const Characters = ({ initial, filtered, error, search }) => {
                             ))
                             :
                             filtered.map(e => (
-                                <CharCard
+                                <InfoCard
+                                    title={title}
                                     key={e.id}
                                     data={e}
                                 />
@@ -62,27 +63,24 @@ const Characters = ({ initial, filtered, error, search }) => {
                         />
                     </div>
                     : null
-
             }
         </>
     )
 }
-
-
 function mapState(state) {
     return {
-        initial: state.characters.array,
-        filtered: state.characters.filtered,
-        error: state.characters.error,
-        search: state.characters.search
+        initial: state.locations.array,
+        filtered: state.locations.filteredLoc,
+        error: state.locations.errorLoc,
+        search: state.locations.searchLoc
     }
 }
 
-Characters.propTypes = {
+Locations.propTypes = {
     initial: PropTypes.array.isRequired,
     filtered: PropTypes.array,
     error: PropTypes.bool,
     search: PropTypes.string
 }
 
-export default connect(mapState)(Characters);
+export default connect(mapState)(Locations);
