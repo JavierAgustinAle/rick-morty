@@ -12,7 +12,7 @@ const SearchBar = ({ title,
     getLocationsFiltersAction, removeSearchCharAction,
     removeSearchEpisodeAction, removeSearchLocationsAction }) => {
 
-    function searchInfo(e) {
+    function searchInfo(e): void {
         let target: string = e.target.value;
         if (target.length > 0)
             target = target[0].toUpperCase() + target.slice(1);
@@ -47,7 +47,7 @@ const SearchBar = ({ title,
         }
     }
 
-    function clearSearch() {
+    function clearSearch(): void {
         if (title === 'characters') {
             removeSearchCharAction();
             (document.getElementById('input') as HTMLFormElement).value = '';

@@ -11,7 +11,7 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
     locationNext, charsPrev, episodPrev, locationPrev, getCharactersAction, getEpisodesAction,
     getLocationsAction }) => {
 
-    function goToNextPage() {
+    function goToNextPage(): boolean {
         switch (title) {
             case 'episodes':
                 getEpisodesAction()
@@ -27,7 +27,7 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
         }
     }
 
-    function goToPrevPage() {
+    function goToPrevPage(): boolean {
         switch (title) {
             case 'episodes':
                 getEpisodesAction(episodPrev)

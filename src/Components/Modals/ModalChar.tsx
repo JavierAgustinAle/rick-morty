@@ -5,7 +5,10 @@ import './Modal.css';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
-const ModalChar = ({ data, onHide, show }): JSX.Element => {
+
+
+const ModalChar = ({ data, onHide, show }) => {
+
     return (
         <Modal isOpen={show}
             style={{
