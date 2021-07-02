@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Redux
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { getCharactersAction } from '../../Redux/Reducers/charsReducer';
 import { getEpisodesAction } from '../../Redux/Reducers/episodesReducer';
 import { getLocationsAction } from '../../Redux/Reducers/locationsReducer';
 
 
-const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, episodNext,
-    locationNext, charsPrev, episodPrev, locationPrev, getCharactersAction, getEpisodesAction,
+const Pagination = ({ title, getCharactersAction, getEpisodesAction,
     getLocationsAction }) => {
 
-    function goToNextPage(): boolean {
+    const chars = useSelector((state: any) => state.characters);
+    const eps = useSelector((state: any) => state.episodes);
+    const locs = useSelector((state: any) => state.locations);
+
+    const goToNextPage = (): boolean => {
         switch (title) {
             case 'episodes':
                 getEpisodesAction()
@@ -27,16 +30,16 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
         }
     }
 
-    function goToPrevPage(): boolean {
+    const goToPrevPage = (): boolean => {
         switch (title) {
             case 'episodes':
-                getEpisodesAction(episodPrev)
+                getEpisodesAction(eps.prevPageEpisod)
                 break;
             case 'characters':
-                getCharactersAction(charsPrev)
+                getCharactersAction(chars.prevPage)
                 break;
             case 'locations':
-                getLocationsAction(locationPrev)
+                getLocationsAction(locs.prevPageLoca)
                 break;
             default:
                 return false
@@ -47,16 +50,16 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
         return (
             <nav className="pt-3">
                 <ul className="pagination justify-content-center">
-                    <li className={`page-item ${episodPrev === null ? "disabled" : ""}`}>
+                    <li className={`page-item ${eps.prevPageEpisod === null ? "disabled" : ""}`}>
                         <button className="page-link" onClick={goToPrevPage}
                         >Previous</button>
                     </li>
                     <li className="page-item disabled" >
                         <label className="page-link text-info">
-                            {`${episodNext != null ? episodNext - 1 : episodTotal} of ${episodTotal}`}
+                            {`${eps.nextPageEpisod != null ? eps.nextPageEpisod - 1 : eps.totalPagesEpisod} of ${eps.totalPagesEpisod}`}
                         </label>
                     </li>
-                    <li className={`page-item ${episodNext === null ? "disabled" : ""}`}>
+                    <li className={`page-item ${eps.nextPageEpisod === null ? "disabled" : ""}`}>
                         <button className="page-link" onClick={goToNextPage}>Next</button>
                     </li>
                 </ul>
@@ -68,15 +71,15 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
         return (
             <nav className="pt-3">
                 <ul className="pagination justify-content-center">
-                    <li className={`page-item ${charsPrev === null ? "disabled" : ""}`}>
+                    <li className={`page-item ${chars.prevPage === null ? "disabled" : ""}`}>
                         <button className="page-link" onClick={goToPrevPage}>Previous</button>
                     </li>
                     <li className="page-item disabled">
                         <label className="page-link text-info">
-                            {`${charsNext != null ? charsNext - 1 : charsTotal} of ${charsTotal}`}
+                            {`${chars.nextPage != null ? chars.nextPage - 1 : chars.totalPages} of ${chars.totalPages}`}
                         </label>
                     </li>
-                    <li className={`page-item ${charsNext === null ? "disabled" : ""}`}>
+                    <li className={`page-item ${chars.nextPage === null ? "disabled" : ""}`}>
                         <button className="page-link"
                             onClick={goToNextPage}
                         >Next</button>
@@ -89,15 +92,15 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
         return (
             <nav className="pt-3">
                 <ul className="pagination justify-content-center">
-                    <li className={`page-item ${locationPrev === null ? "disabled" : ""}`}>
+                    <li className={`page-item ${locs.prevPageLoca === null ? "disabled" : ""}`}>
                         <button onClick={goToPrevPage} className="page-link">Previous</button>
                     </li>
                     <li className="page-item disabled" >
                         <label className="page-link text-info">
-                            {`${locationNext != null ? locationNext - 1 : locationTotal} of ${locationTotal}`}
+                            {`${locs.nextPageLoca != null ? locs.nextPageLoca - 1 : locs.totalPagesLoca} of ${locs.totalPagesLoca}`}
                         </label>
                     </li>
-                    <li className={`page-item ${locationNext === null ? "disabled" : ""}`}>
+                    <li className={`page-item ${locs.nextPageLoca === null ? "disabled" : ""}`}>
                         <button className="page-link"
                             onClick={goToNextPage}
                         >Next</button>
@@ -107,37 +110,13 @@ const Pagination = ({ title, charsTotal, episodTotal, locationTotal, charsNext, 
         )
     }
 
-
-
 }
 
 function mapState(state: any) {
-    return {
-        charsTotal: state.characters.totalPages,
-        episodTotal: state.episodes.totalPagesEpisod,
-        locationTotal: state.locations.totalPagesLoca,
-
-        charsNext: state.characters.nextPage,
-        episodNext: state.episodes.nextPageEpisod,
-        locationNext: state.locations.nextPageLoca,
-
-        charsPrev: state.characters.prevPage,
-        episodPrev: state.episodes.prevPageEpisod,
-        locationPrev: state.locations.prevPageLoca,
-
-    }
+    return {}
 }
 
 Pagination.propTypes = {
-    charsTotal: PropTypes.number.isRequired,
-    episodTotal: PropTypes.number.isRequired,
-    locationTotal: PropTypes.number.isRequired,
-    charsNext: PropTypes.number,
-    episodNext: PropTypes.number,
-    locationNext: PropTypes.number,
-    charsPrev: PropTypes.number,
-    episodPrev: PropTypes.number,
-    locationPrev: PropTypes.number,
     getCharactersAction: PropTypes.func.isRequired,
     getEpisodesAction: PropTypes.func.isRequired,
     getLocationsAction: PropTypes.func.isRequired
