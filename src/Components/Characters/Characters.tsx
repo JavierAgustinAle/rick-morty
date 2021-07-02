@@ -67,7 +67,6 @@ const Characters = (): JSX.Element => {
                         />
                     </div>
                     : null
-
             }
         </>
     )

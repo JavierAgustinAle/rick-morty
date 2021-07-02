@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // Components
 import SearchBar from '../SearchBar/SearchBar';
 import InfoCard from '../InfoCard/InfoCard';
@@ -7,11 +6,17 @@ import Pagination from '../Pagination/Pagination';
 import NoData from '../NoData/NoData';
 
 // Redux
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Episodes = ({ initial, filtered, error, search }): JSX.Element => {
+const Episodes = (): JSX.Element => {
 
-    const title: string = "episodes"
+    const title: string = "episodes";
+
+    const initial = useSelector((state: any) => state.episodes.array);
+    const filtered = useSelector((state: any) => state.episodes.filteredEpi);
+    const error = useSelector((state: any) => state.episodes.errorEpiso);
+    const search = useSelector((state: any) => state.episodes.searchEpi);
+
     return (
         <>
             <h1 className="pt-1 text-center">Search your favorite episode</h1>
@@ -71,20 +76,4 @@ const Episodes = ({ initial, filtered, error, search }): JSX.Element => {
     )
 }
 
-function mapState(state: any) {
-    return {
-        initial: state.episodes.array,
-        filtered: state.episodes.filteredEpi,
-        error: state.episodes.errorEpiso,
-        search: state.episodes.searchEpi
-    }
-}
-
-Episodes.propTypes = {
-    initial: PropTypes.array.isRequired,
-    filtered: PropTypes.array,
-    error: PropTypes.bool,
-    search: PropTypes.string
-}
-
-export default connect(mapState)(Episodes);
+export default Episodes;
