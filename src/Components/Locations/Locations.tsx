@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 // Components
 import SearchBar from '../SearchBar/SearchBar';
 import InfoCard from '../InfoCard/InfoCard';
@@ -7,10 +6,16 @@ import Pagination from '../Pagination/Pagination';
 import NoData from '../NoData/NoData';
 
 // Redux
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Locations = ({ initial, filtered, error, search }): JSX.Element => {
+const Locations = (): JSX.Element => {
     const title: string = "locations";
+
+    const initial = useSelector((state: any) => state.locations.array);
+    const filtered = useSelector((state: any) => state.locations.filteredLoc);
+    const error = useSelector((state: any) => state.locations.errorLoc);
+    const search = useSelector((state: any) => state.locations.searchLoc);
+
     return (
         <>
             <h1 className="pt-1 text-center">Search your favorite location</h1>
@@ -67,20 +72,5 @@ const Locations = ({ initial, filtered, error, search }): JSX.Element => {
         </>
     )
 }
-function mapState(state) {
-    return {
-        initial: state.locations.array,
-        filtered: state.locations.filteredLoc,
-        error: state.locations.errorLoc,
-        search: state.locations.searchLoc
-    }
-}
 
-Locations.propTypes = {
-    initial: PropTypes.array.isRequired,
-    filtered: PropTypes.array,
-    error: PropTypes.bool,
-    search: PropTypes.string
-}
-
-export default connect(mapState)(Locations);
+export default Locations;
