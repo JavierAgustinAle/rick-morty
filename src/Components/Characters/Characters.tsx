@@ -1,17 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // Componets
 import SearchBar from '../SearchBar/SearchBar';
 import CharCard from '../CharCard/CharCard';
 import Pagination from '../Pagination/Pagination';
 import NoData from '../NoData/NoData';
 // Redux
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
-const Characters = ({ initial, filtered, error, search }): JSX.Element => {
+
+const Characters = (): JSX.Element => {
 
     const title: string = 'characters';
+
+    const initial = useSelector((state: any) => state.characters.array);
+    const filtered = useSelector((state: any) => state.characters.filtered);
+    const error = useSelector((state: any) => state.characters.error);
+    const search = useSelector((state: any) => state.characters.search);
+
     return (
         <>
             <h1 className="pt-1 text-center">Search your favorite character</h1>
@@ -41,7 +47,6 @@ const Characters = ({ initial, filtered, error, search }): JSX.Element => {
                                     key={e.id}
                                     data={e}
                                 />
-
                             ))
                             :
                             filtered.map(e => (
@@ -68,21 +73,4 @@ const Characters = ({ initial, filtered, error, search }): JSX.Element => {
     )
 }
 
-
-function mapState(state: any) {
-    return {
-        initial: state.characters.array,
-        filtered: state.characters.filtered,
-        error: state.characters.error,
-        search: state.characters.search
-    }
-}
-
-Characters.propTypes = {
-    initial: PropTypes.array.isRequired,
-    filtered: PropTypes.array,
-    error: PropTypes.bool,
-    search: PropTypes.string
-}
-
-export default connect(mapState)(Characters);
+export default Characters;
